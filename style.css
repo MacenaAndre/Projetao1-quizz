@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@100;300;400;500;700&display=swap');
-
+/*  */@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@100;300;400;500;700&display=swap');
 .topo {
     height: 69px;
     width: 100%;
@@ -13,4 +12,8 @@
     font-size: 37px;
     font-weight: 700;
     
+}
+.conteudo h2{
+    margin: 20px 0;
+    text-align: center;
 }
