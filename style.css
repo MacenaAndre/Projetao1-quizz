@@ -3,6 +3,7 @@
 body {
     font-family: 'Roboto';
     background-color: #fafafa;
+
 }
 .topo {
     height: 69px;
@@ -23,6 +24,7 @@ body {
     align-items: center;
     background-color: #fafafa;
     margin-top: 7px;
+    box-sizing: border-box;
 }
 .texto-usuario {
     width: 250px;
@@ -30,6 +32,18 @@ body {
     font-weight: 400;
     text-align: center;
     color: #B9B9B9;
+}
+.quizz-usuario {
+    height: 181px;
+    width: 1055px;
+    border-radius: 5px;
+    border: 1px dashed #D4D4D4;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 77px 0px;
+    flex-direction: column;
+    box-sizing: border-box;
 }
 .botao-criar {
     height: 40px;
@@ -52,13 +66,16 @@ body {
 .quizzes{
     display: flex;
     flex-wrap: wrap;
-    width: 1095px;
+    width: 1055px;
+    box-sizing: border-box;
+    justify-content: space-between;
 }
 .quizz {
     height: 181px;
     width: 340px;
-    margin: 12px 15px 12px 0px;
+    margin: 12px 0px 12px 0px;
     position: relative;
+    box-sizing: border-box;
 }
 .img-quizz {
     height: 181px;
@@ -67,6 +84,14 @@ body {
     object-fit: cover;
     object-fit: fill;      /* tem que acertar o ajuste da imagem depois, degrade, borda botão, imagem loagding*/
     cursor: pointer;
+}
+.degrade {
+    height: 181px;
+    width: 340px;
+    border-radius: 5px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.1%, #000000 100%);
+    position: absolute;
+    top: 0px;
 }
 .titulo-quizz {
     position: absolute;
@@ -84,17 +109,6 @@ body {
     margin: 40px 0;
     text-align: center;
     font-weight: 700;
-}
-.quizz-usuario {
-    height: 181px;
-    width: 1051px;
-    border-radius: 5px;
-    border: 1px dashed #D4D4D4;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    margin: 77px 0px;
-    flex-direction: column;
 }
 .page3-1{
     width: 100%;

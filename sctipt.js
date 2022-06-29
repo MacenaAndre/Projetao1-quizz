@@ -21,7 +21,8 @@ function carregouSucesso (resposta) {
         elemento.innerHTML += `
         <div class="quizz">
             <img class="img-quizz" src="${listaquizz[i].image}" alt="">
-           <p class="titulo-quizz">${listaquizz[i].title}</p>
+            <p class="titulo-quizz">${listaquizz[i].title}</p>
+            <div class="degrade"></div>
         </div>
         `
     }
