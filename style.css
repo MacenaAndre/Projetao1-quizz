@@ -65,7 +65,7 @@ body {
     width: 340px;
     border-radius: 5px;
     object-fit: cover;
-    object-fit: fill;      /* tem que acertar o ajuste da imagem depois*/
+    object-fit: fill;      /* tem que acertar o ajuste da imagem depois, degrade, borda botão, imagem loagding*/
     cursor: pointer;
 }
 .titulo-quizz {

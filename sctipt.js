@@ -35,7 +35,7 @@ function renderizarPaginaTresUm(){
     <div class="page3-1">
         <h3>Comece pelo começo</h3>
         <div class="campo informacoes">
-            <input class="titulo-quizz" type="text" placeholder="Título do seu quizz">
+            <input class="titulo" type="text" placeholder="Título do seu quizz">
             <input class="url-quizz" type="text" placeholder="URL da imagem do seu quizz">
             <input class="perguntas-quizz" type="text" placeholder="Quantidade de perguntas do quizz">
             <input class="niveis-quizz" type="text" placeholder="Quantidade de níveis do quizz">
