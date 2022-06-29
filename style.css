@@ -19,7 +19,9 @@ body {
 }
 
 .conteudo {
-    
+    display: flex;
+    justify-content: center;
+    background-color: #fafafa;
 }
 .conteudo h3 {
     margin: 40px 0;
@@ -31,8 +33,15 @@ body {
     width: 1051px;
     border-radius: 5px;
     border: 1px dashed #D4D4D4;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 77px;
+    flex-direction: column;
 }
-
+.page3-1{
+    width: 100%;
+}
 .campo{
     margin: 40px 0;
     padding: 20px 0;
@@ -55,7 +64,7 @@ body {
     border: 1px solid #D1D1D1;
     border-radius: 3px;
 }
-.botao{
+.botao-informacoes{
     background-color: #EC362D;
     color: #FFF5F4;
     width: 85%;
@@ -65,4 +74,25 @@ body {
     align-items: center;
     justify-content: center;
     display: flex;
+    
+}
+.texto-usuario {
+    width: 250px;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    color: #B9B9B9;
+}
+.botao {
+    height: 40px;
+    width: 151px;
+    border-radius: 50px;
+    color: #EC362D;
+    font-size: 21px;
+    font-weight: 400;
+    text-align: center;
+    border: 1px dashed #EC362D;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
 }
