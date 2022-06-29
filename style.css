@@ -17,7 +17,8 @@ body {
 }
 .conteudo {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     background-color: #fafafa;
 }
 .quizzusuario {
@@ -50,4 +51,11 @@ body {
     display: flex; 
     align-items: center;
     justify-content: center;
+}
+.titulo-publico {
+    font-size: 20px;
+    font-weight: 700;
+}
+.quizz-publico {
+    margin-top: 77px;
 }
