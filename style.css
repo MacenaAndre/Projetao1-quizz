@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@100;300;400;500;700&display=swap');
-
+body {
+    @import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@100;300;400;500;700&display=swap');
+}
 .topo {
     height: 69px;
     width: 100%;
@@ -12,5 +13,10 @@
     box-shadow: 0px 4px 4px 0px #00000040;
     font-size: 37px;
     font-weight: 700;
-    
+}
+.quizzusuario {
+    height: 181px;
+    width: 1051px;
+    border-radius: 5px;
+    border: 1px dashed #D4D4D4;
 }
