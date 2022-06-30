@@ -110,9 +110,17 @@ body {
     text-align: center;
     font-weight: 700;
 }
+.campo-perguntas h4{
+    font-weight: 700;
+    display: initial;
+}
 .page3-1{
     width: 100%;
 }
+.page3-2{
+    width: 100%;
+}
+
 .campo{
     margin: 40px 0;
     padding: 20px 0;
@@ -120,13 +128,12 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     background-color: white;
 
     box-shadow: 0px 0px 4px 0px #00000040;
 }
 .campo input{
-    margin: 5px 0;
+    margin: 5px auto;
     padding: 0 10px;
     width: 85%;
     min-height: 36px;
@@ -134,6 +141,9 @@ body {
     font-style: italic;
     border: 1px solid #D1D1D1;
     border-radius: 3px;
+}
+.campo-perguntas h4{
+    margin-left: 15px;
 }
 .botao-informacoes{
     background-color: #EC362D;
