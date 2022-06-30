@@ -59,7 +59,7 @@ function avancaPerguntas(){
 }
 
 function verificarInformacoesBasicas(){
-    const titulo = document.querySelector(".titulo-quizz").value;
+    const titulo = document.querySelector(".titulo").value;
     const url = document.querySelector(".url-quizz").value;
     const perguntas = document.querySelector(".perguntas-quizz").value;
     const niveis = document.querySelector(".niveis-quizz").value;
