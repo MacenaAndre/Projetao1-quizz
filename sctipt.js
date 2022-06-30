@@ -1,4 +1,13 @@
 let listaquizz;
+let numNiveis;
+let numPerguntas;
+let objetoPost = {
+    id: "", 
+    title: "", 
+    image: "", 
+    levels: [], 
+    questions: []
+};
 
 function carregarPublicos() {
 
@@ -47,6 +56,7 @@ function carregouSucesso (resposta) {
     }
     
 }
+//------------executar aqui
 carregarPublicos();
 
 function renderizarPaginaTresUm(){
@@ -70,11 +80,15 @@ function renderizarPaginaTresDois(){
     document.querySelector('.conteudo').innerHTML = 
     `<h1>AE</h1>`
 }
+function renderizarPaginaTresTres() {
+    document.querySelector(".conteudo").innerHTML = ``;
+}
 
 function avancaPerguntas(){
     if(verificarInformacoesBasicas()){
         renderizarPaginaTresDois();
     }  
+    console.log(objetoPost);
 }
 
 function verificarInformacoesBasicas(){
@@ -82,6 +96,7 @@ function verificarInformacoesBasicas(){
     const url = document.querySelector(".url-quizz").value;
     const perguntas = document.querySelector(".perguntas-quizz").value;
     const niveis = document.querySelector(".niveis-quizz").value;
+
     if(titulo.length < 20 || titulo > 65){
         alert('O título precisa ter entre 20 e 65 caracteres.');
         return false;
@@ -98,5 +113,23 @@ function verificarInformacoesBasicas(){
         alert('O número mínimo de perguntas é 3.');
         return false;
     }
+    
+    objetoPost.title = titulo;
+    objetoPost.image = url;
+    numNiveis = Number(niveis);
+    numPerguntas = Number(perguntas);
+    objetoNiveis(numNiveis);
+
     return true;
+}
+function objetoNiveis(numero) {
+    for(let i = 0; i < numNiveis; i++) {
+        objetoPost.levels.push({
+            title: "",
+            image: "",
+            text: "",
+            minValeu: 0
+        })
+    }
+    console.log(objetoPost.levels);
 }
