@@ -6,7 +6,24 @@ function carregarPublicos() {
 
     promise.catch(carregouErro);
     promise.then(carregouSucesso);
+
+    const pag1 = document.querySelector(".conteudo");
+    pag1.innerHTML = `
+    <div class="page1">
+            <div class="quizz-usuario">
+               <p class="texto-usuario">Você não criou nenhum quizz ainda :(</p>
+               <div class="botao-criar" onclick="renderizarPaginaTresUm()">Criar Quizz</div>
+            </div>
+            <div class="quizz-publico">
+                <p class="titulo-publico">Todos os Quizzes</p>
+                <div class="quizzes">
+                    <!-- adicionar imagem de loading depois -->
+                </div>
+            </div>
+        </div>
+    `
 }
+
 function carregouErro (Erro) {
      alert("deu ruim");
 }
@@ -21,8 +38,10 @@ function carregouSucesso (resposta) {
         elemento.innerHTML += `
         <div class="quizz">
             <img class="img-quizz" src="${listaquizz[i].image}" alt="">
-            <p class="titulo-quizz">${listaquizz[i].title}</p>
             <div class="degrade"></div>
+            <div class="centralizar-titulo">
+                <p class="titulo-quizz">${listaquizz[i].title}</p>
+            </div>    
         </div>
         `
     }

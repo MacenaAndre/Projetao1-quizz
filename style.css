@@ -80,8 +80,7 @@ body {
     height: 181px;
     width: 340px;
     border-radius: 5px;
-    object-fit: cover;
-    object-fit: fill;      /* tem que acertar o ajuste da imagem depois, degrade, borda botão, imagem loagding*/
+    object-fit: cover;         /* tem que acertar o ajuste da imagem depois, imagem loagding*/
     cursor: pointer;
 }
 .degrade {
@@ -92,9 +91,15 @@ body {
     position: absolute;
     top: 0px;
 }
-.titulo-quizz {
+.centralizar-titulo {
     position: absolute;
-    top: 73%;
+    top: 75%;
+    width: 340px;
+    height: 15%;
+    display: flex;
+    align-items: center;
+}
+.titulo-quizz {
     padding: 0px 18px;
     max-width: 320px;
     width: 100%;
@@ -103,6 +108,7 @@ body {
     font-weight: 400;
     text-align: left;
     color: white;
+    z-index: 1;
 }
 .conteudo h3 {
     margin: 40px 0;
@@ -171,7 +177,6 @@ body {
      }
     .conteudo {
         width: 100%;
-        min-width: 340px;
     }
     .page1 {
         width: 50%;
