@@ -3,7 +3,6 @@
 body {
     font-family: 'Roboto';
     background-color: #fafafa;
-
 }
 .topo {
     height: 69px;
@@ -156,4 +155,46 @@ body {
     justify-content: center;
     display: flex;
     
+}
+
+@media (max-width: 1100px) {
+
+     body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+     }
+    .conteudo {
+        width: 50%;
+        min-width: 340px;
+    }
+    .page1 {
+        width: 100%;
+    }
+    .quizz-usuario {
+        width: 100%;
+    }
+    .quizzes {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .quizz-publico {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .quizz {
+        width: 100%;
+    }
+    .img-quizz {
+        width: 100%;
+    }
+    .titulo-publico {
+        width: 100%;
+    }
+    .degrade {
+        width: 100%;
+    }
 }
