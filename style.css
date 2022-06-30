@@ -80,8 +80,7 @@ body {
     height: 181px;
     width: 340px;
     border-radius: 5px;
-    object-fit: cover;
-    object-fit: fill;      /* tem que acertar o ajuste da imagem depois, degrade, borda botão, imagem loagding*/
+    object-fit: cover;         /* tem que acertar o ajuste da imagem depois, imagem loagding*/
     cursor: pointer;
 }
 .degrade {
@@ -92,9 +91,15 @@ body {
     position: absolute;
     top: 0px;
 }
-.titulo-quizz {
+.centralizar-titulo {
     position: absolute;
-    top: 73%;
+    top: 75%;
+    width: 340px;
+    height: 15%;
+    display: flex;
+    align-items: center;
+}
+.titulo-quizz {
     padding: 0px 18px;
     max-width: 320px;
     width: 100%;
@@ -103,15 +108,24 @@ body {
     font-weight: 400;
     text-align: left;
     color: white;
+    z-index: 1;
 }
 .conteudo h3 {
     margin: 40px 0;
     text-align: center;
     font-weight: 700;
 }
+.campo-perguntas h4{
+    font-weight: 700;
+    display: initial;
+}
 .page3-1{
     width: 100%;
 }
+.page3-2{
+    width: 100%;
+}
+
 .campo{
     margin: 40px 0;
     padding: 20px 0;
@@ -119,13 +133,12 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     background-color: white;
 
     box-shadow: 0px 0px 4px 0px #00000040;
 }
 .campo input{
-    margin: 5px 0;
+    margin: 5px auto;
     padding: 0 10px;
     width: 85%;
     min-height: 36px;
@@ -133,6 +146,9 @@ body {
     font-style: italic;
     border: 1px solid #D1D1D1;
     border-radius: 3px;
+}
+.campo-perguntas h4{
+    margin-left: 15px;
 }
 .botao-informacoes{
     background-color: #EC362D;
