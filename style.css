@@ -155,11 +155,11 @@ body {
         align-items: center;
      }
     .conteudo {
-        width: 50%;
-        min-width: 340px;
+        width: 100%;
     }
     .page1 {
-        width: 100%;
+        width: 50%;
+        min-width: 340px;
     }
     .quizz-usuario {
         width: 100%;
