@@ -82,39 +82,39 @@ function renderizarPaginaTresDois(){
             `<div class="page3-2">
             
         
-            <div class="campo">
+            <div class="campo pergunta${i}">
                 <div class="campo-topo" onclick="selecionarPergunta(this)">
                     <h4>Pergunta ${i+1}</h4>
                     <img  src="./images/Vector.png" alt="">
                 </div>
-                <div class="campo-corpo escondido">
+                <div class="campo-corpo escondido ">
                     <div class="campo-perguntas">
                     
-                        <input type="text" class="titulo" placeholder="Texto da pergunta">
-                        <input type="text" class="hexa" placeholder="Cor de fundo da pergunta">
+                        <input type="text" class="titulo-pergunta" placeholder="Texto da pergunta">
+                        <input type="text" class="hexa-pergunta" placeholder="Cor de fundo da pergunta">
                     
                 </div>
                 
                     <div class="campo-perguntas">
                         <h4>Resposta correta</h4>
-                        <input type="text" placeholder="Resposta correta">
-                        <input type="text" placeholder="URL da imagem">
+                        <input type="text" class="resposta-correta" placeholder="Resposta correta">
+                        <input type="text" class="url-correta" placeholder="URL da imagem">
                     </div>
                 
                     <div class="campo-perguntas">
                         <h4>Respostas incorretas</h4>
-                        <input type="text" placeholder="Resposta incorreta 1">
-                        <input type="text" placeholder="URL da imagem 1">
+                        <input type="text" class="resposta-incorreta1" placeholder="Resposta incorreta 1">
+                        <input type="text" class="url-incorreta1" placeholder="URL da imagem 1">
                     </div>
                     
                     <div class="campo-perguntas">
-                        <input type="text" placeholder="Resposta incorreta 2">
-                        <input type="text" placeholder="URL da imagem 2">
+                        <input type="text" class="resposta-incorreta2" placeholder="Resposta incorreta 2">
+                        <input type="text" class="url-incorreta2" placeholder="URL da imagem 2">
                     </div>
                     
                     <div class="campo-perguntas">
-                        <input type="text" placeholder="Resposta incorreta 3">
-                        <input type="text" placeholder="URL da imagem 3">
+                        <input type="text" class="resposta-incorreta3" placeholder="Resposta incorreta 3">
+                        <input type="text" class="url-incorreta3" placeholder="URL da imagem 3">
                     </div>
                 
                 </div>
@@ -128,7 +128,11 @@ function renderizarPaginaTresDois(){
         `<div class="botao-informacoes" onclick="avancaFim()">
               Prosseguir pra criar níveis
         </div>  
-        `
+        `;
+        /*`<div class="botao-informacoes" onclick="verificarPerguntas()">
+        Prosseguir pra criar níveis
+        </div>  
+        `*/
     
 }
 function avancaPerguntas(){
@@ -170,6 +174,63 @@ function verificarInformacoesBasicas(){
 
     return true;
 }
+function verificarPerguntas(){
+    for(let i = 0; i < numPerguntas; i++){
+        let caixaPergunta = document.querySelector(`.pergunta${i}`);
+        const tituloPergunta = caixaPergunta.querySelector('.titulo-pergunta').value;
+        const hexaPergunta = caixaPergunta.querySelector('.hexa-pergunta').value;
+        const respostaCorreta = caixaPergunta.querySelector('.resposta-correta').value;
+        const urlCorreta = caixaPergunta.querySelector('.url-correta').value;
+        const respostaIncorreta1 = caixaPergunta.querySelector('.resposta-incorreta1').value;
+        const urlIncorreta1 = caixaPergunta.querySelector('.url-incorreta1').value;
+        const respostaIncorreta2 = caixaPergunta.querySelector('.resposta-incorreta2').value;
+        const urlIncorreta2 = caixaPergunta.querySelector('.url-incorreta2').value;
+        const respostaIncorreta3 = caixaPergunta.querySelector('.resposta-incorreta3').value;
+        const urlIncorreta3 = caixaPergunta.querySelector('.url-incorreta3').value;
+
+        if(tituloPergunta.length < 20){
+            alert(`Caixa ${i+1}: O título precisa ter no mínimo 20 caracteres.`);
+            return;
+        }
+        if(respostaCorreta === null){
+            alert(`Caixa ${i+1}: Resposta correta não pode estar vazia`);
+            return;
+        }
+        if(!urlCorreta.includes('https://')){
+            alert(`Caixa ${i+1}: Formato da URL Correta está inválido, digite imagens em URL válidas`);
+            return;
+        }
+        if(respostaIncorreta1 === null){
+            alert(`Caixa ${i+1}: Resposta Incorreta 1 não pode estar vazia.`);
+            return;
+        }
+        if(!urlIncorreta1.includes('https://')){
+            alert(`Caixa ${i+1}: Formato da URL Incorreta 1 está inválido, digite imagens em URL válidas`);
+            return;
+        }
+        if(respostaIncorreta2 !== ""){
+            if(respostaIncorreta2.length < 20){
+                alert(`Caixa ${i+1}: Resposta Incorreta 2 não pode estar vazia.`);
+                return
+            }
+            if(urlIncorreta2.includes('https://')){
+                alert(`Caixa ${i+1}: Formato da URL Incorreta 2 está inválido, digite imagens em URL válidas`);
+                return;
+            }
+        }
+        if(respostaIncorreta3 !== ""){
+            if(respostaIncorreta3.length < 20){
+                alert(`Caixa ${i+1}: Resposta Incorreta 3 não pode estar vazia.`);
+                return
+            }
+            if(urlIncorreta3.includes('https://')){
+                alert(`Caixa ${i+1}: Formato da URL Incorreta 3 está inválido, digite imagens em URL válidas`);
+                return;
+            }
+        }
+    }
+}
+
 function objetoNiveis(numero) {
     for(let i = 0; i < numNiveis; i++) {
         objetoPost.levels.push({
