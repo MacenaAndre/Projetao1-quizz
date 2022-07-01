@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@100;300;400;500;700&display=swap');
-
+*{
+    box-sizing: border-box;
+}
 body {
     font-family: 'Roboto';
     background-color: #fafafa;
@@ -131,6 +133,9 @@ body {
     width: 100%;
 }
 .campo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 0 auto;
     padding: 2px 0;
     width: 40%;
@@ -151,7 +156,20 @@ body {
 }
 .campo-perguntas{
     width: 90%;
-    margin: 20px auto;
+}
+.campo-topo{
+    width: 90%;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.campo-topo h4{
+    font-weight: 700;
+}
+.campo-corpo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .botao-informacoes{
     background-color: #EC362D;
@@ -165,7 +183,9 @@ body {
     display: flex;
     cursor: pointer;
 }
-
+.escondido{
+    display: none;
+}
 @media (max-width: 1100px) {
 
      body {

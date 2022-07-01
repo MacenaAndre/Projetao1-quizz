@@ -14,7 +14,7 @@ function carregarPublicos() {
     const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
 
     promise.catch(carregouErro);
-    promise.then(carregouSucesso);
+    //promise.then(carregouSucesso);
 
     const pag1 = document.querySelector(".conteudo");
     pag1.innerHTML = `
@@ -57,7 +57,7 @@ function carregouSucesso (resposta) {
     
 }
 //------------executar aqui
-carregarPublicos();
+//carregarPublicos();
 
 function renderizarPaginaTresUm(){
     document.querySelector('.conteudo').innerHTML = 
@@ -78,36 +78,44 @@ function renderizarPaginaTresUm(){
 }
 function renderizarPaginaTresDois(){
     document.querySelector('.conteudo').innerHTML = 
-        `<div class="page3-2">
+            `<div class="page3-2">
             <h3>Crie suas perguntas</h3>
         
             <div class="campo">
-                <div class="campo-perguntas">
-                    <h4>Pergunta 1</h4>
-                    <input type="text" placeholder="Texto da pergunta">
-                    <input type="text" placeholder="Cor de fundo da pergunta">
+                <div class="campo-topo">
+                    <h4>Pergunta ${i}</h4>
+                    <img onclick="selecionarPergunta()" src="./images/Vector.png" alt="">
+                </div>
+                <div class="campo-corpo escondido">
+                    <div class="campo-perguntas">
+                    
+                        <input type="text" placeholder="Texto da pergunta">
+                        <input type="text" placeholder="Cor de fundo da pergunta">
+                    
                 </div>
                 
-                <div class="campo-perguntas">
-                    <h4>Resposta correta</h4>
-                    <input type="text" placeholder="Resposta correta">
-                    <input type="text" placeholder="URL da imagem">
-                </div>
-            
-                <div class="campo-perguntas">
-                    <h4>Respostas incorretas</h4>
-                    <input type="text" placeholder="Resposta incorreta 1">
-                    <input type="text" placeholder="URL da imagem 1">
-                </div>
+                    <div class="campo-perguntas">
+                        <h4>Resposta correta</h4>
+                        <input type="text" placeholder="Resposta correta">
+                        <input type="text" placeholder="URL da imagem">
+                    </div>
                 
-                <div class="campo-perguntas">
-                    <input type="text" placeholder="Resposta incorreta 2">
-                    <input type="text" placeholder="URL da imagem 2">
-                </div>
+                    <div class="campo-perguntas">
+                        <h4>Respostas incorretas</h4>
+                        <input type="text" placeholder="Resposta incorreta 1">
+                        <input type="text" placeholder="URL da imagem 1">
+                    </div>
+                    
+                    <div class="campo-perguntas">
+                        <input type="text" placeholder="Resposta incorreta 2">
+                        <input type="text" placeholder="URL da imagem 2">
+                    </div>
+                    
+                    <div class="campo-perguntas">
+                        <input type="text" placeholder="Resposta incorreta 3">
+                        <input type="text" placeholder="URL da imagem 3">
+                    </div>
                 
-                <div class="campo-perguntas">
-                    <input type="text" placeholder="Resposta incorreta 3">
-                    <input type="text" placeholder="URL da imagem 3">
                 </div>
                 
                 
@@ -115,7 +123,7 @@ function renderizarPaginaTresDois(){
             <div class="botao-informacoes">
                 Prosseguir pra criar níveis
             </div>  
-        </div>
+            </div>
         `
 }
 function renderizarPaginaTresTres() {
@@ -170,4 +178,9 @@ function objetoNiveis(numero) {
         })
     }
     console.log(objetoPost.levels);
+}
+
+function selecionarPergunta(){
+    const campoCorpo = document.querySelector('.campo-corpo');
+    campoCorpo.classList.toggle('escondido');
 }
