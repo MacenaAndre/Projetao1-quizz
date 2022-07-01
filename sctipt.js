@@ -125,14 +125,15 @@ function renderizarPaginaTresDois(){
         `
     }
     document.querySelector('.conteudo').innerHTML += 
-        `<div class="botao-informacoes" onclick="avancaFim()">
+        /*`<div class="botao-informacoes" onclick="avancaFim()">
               Prosseguir pra criar níveis
         </div>  
         `;
-        /*`<div class="botao-informacoes" onclick="verificarPerguntas()">
+        */
+        `<div class="botao-informacoes" onclick="verificarPerguntas()">
         Prosseguir pra criar níveis
         </div>  
-        `*/
+        `
     
 }
 function avancaPerguntas(){
@@ -192,6 +193,10 @@ function verificarPerguntas(){
             alert(`Caixa ${i+1}: O título precisa ter no mínimo 20 caracteres.`);
             return;
         }
+        if(!validarHexa(hexaPergunta)){
+            alert('Cor inválida');
+            return;
+        }
         if(respostaCorreta === null){
             alert(`Caixa ${i+1}: Resposta correta não pode estar vazia`);
             return;
@@ -228,7 +233,15 @@ function verificarPerguntas(){
                 return;
             }
         }
+        
+       renderizarPaginaTresTres();      
     }
+}
+
+function validarHexa(hexa){
+    let reg=/^#([0-9a-f]{3}){1,2}$/i;
+    console.log(reg.test(hexa))
+    return reg.test(hexa);
 }
 
 function objetoNiveis(numero) {
@@ -256,20 +269,19 @@ function renderizarPaginaTresTres() {
     document.querySelector('.conteudo').innerHTML = `<h3>Agora, decida os níveis!</h3>`
     for(let i = 0; i < numNiveis; i++) {
     document.querySelector(".conteudo").innerHTML += `
-        <div class="page3-3">
-            
-                <div class="campo">
-                    <div class="campo-topo" onclick="selecionarPergunta(this)">
-                        <div class="campo-niveis nivel${i}">
-                        <h4>Nível ${i + 1}</h4>
-                    </div>
-                    <div class="campo-corpo escondido">
-                        <input class="titulo-nivel" type="text" placeholder="Título do nível">
-                        <input class="pctg-nivel"type="text" placeholder="% de acerto mínima">
-                        <input class="url-nivel" type="text" placeholder="URL da imagem do nível">
-                        <input class="descricao-nivel" type="text" placeholder="Descrição do nível">
-                    </div>
-                </div>    
+            <div class="page3-3">
+            <div class="campo nivel${i}">
+                <div class="campo-topo" onclick="selecionarPergunta(this)">
+                    <h4>Nível ${i + 1}</h4>
+                    <img  src="./images/Vector.png" alt="">
+                </div>
+                <div class="campo-corpo escondido">
+                    <input class="titulo-nivel" type="text" placeholder="Título do nível">
+                    <input class="pctg-nivel"type="text" placeholder="% de acerto mínima">
+                    <input class="url-nivel" type="text" placeholder="URL da imagem do nível">
+                    <input class="descricao-nivel" type="text" placeholder="Descrição do nível">
+                </div>
+            </div>
         </div>
     `;
     }
@@ -307,7 +319,9 @@ function verficiarNiveis () {
         alert('O número mínimo de perguntas é 30.');
         return false;
     }
+    
 }
+
     return true;
 }
 function renderizarpaginatresquatro() {
