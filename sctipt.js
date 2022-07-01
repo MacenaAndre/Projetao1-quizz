@@ -119,6 +119,7 @@ function verificarInformacoesBasicas(){
     numNiveis = Number(niveis);
     numPerguntas = Number(perguntas);
     objetoNiveis(numNiveis);
+    objetoPerguntas(numPerguntas);
 
     return true;
 }
@@ -132,4 +133,44 @@ function objetoNiveis(numero) {
         })
     }
     console.log(objetoPost.levels);
+}
+function objetoPerguntas (numero) {
+    for(let i = 0; i < numPerguntas; i++) {
+        objetoPost.questions.push({
+            title: "",
+            color: "",
+            answers: []
+        })
+    }
+    console.log(objetoPost.questions);
+}
+function avancaNiveis() {
+    if(verficiarNiveis()) {
+        //renderizarpaginatresquatro()
+    }
+}
+function verficiarNiveis () {
+    const titulo = document.querySelector(".titulo-nivel").value;
+    const url = document.querySelector(".url-nivel").value;
+    const porcentagem = document.querySelector(".pctg-nivel").value;
+    const descricao = document.querySelector(".descricao-nivel").value;
+
+    if(titulo.length < 10)  {
+        alert('O título precisa ter pelo menos 10 caractéres.');
+        return false;
+    }
+    if(!url.includes('https://')){
+        alert('Formato de imagem inválido, digite imagens em URL');
+        return false;
+    }
+    if(porcentagem >= 0 && porcentagem <=100){
+        alert('Número inválido, digite um numero de 0 a 100.');
+        return false;
+    }
+    if(descricao.length < 30){
+        alert('O número mínimo de perguntas é 30.');
+        return false;
+    }
+
+    return true;
 }
