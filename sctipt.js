@@ -14,7 +14,7 @@ function carregarPublicos() {
     const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
 
     promise.catch(carregouErro);
-    //promise.then(carregouSucesso);
+    promise.then(carregouSucesso);
 
     const pag1 = document.querySelector(".conteudo");
     pag1.innerHTML = `
@@ -57,7 +57,7 @@ function carregouSucesso (resposta) {
     
 }
 //------------executar aqui
-//carregarPublicos();
+carregarPublicos();
 
 function renderizarPaginaTresUm(){
     document.querySelector('.conteudo').innerHTML = 
@@ -77,20 +77,22 @@ function renderizarPaginaTresUm(){
     `
 }
 function renderizarPaginaTresDois(){
-    document.querySelector('.conteudo').innerHTML = 
+    document.querySelector('.conteudo').innerHTML += `<h3>Crie suas perguntas</h3>`
+    for(let i = 0; i < numPerguntas;i++){
+        document.querySelector('.conteudo').innerHTML += 
             `<div class="page3-2">
-            <h3>Crie suas perguntas</h3>
+            
         
             <div class="campo">
-                <div class="campo-topo">
-                    <h4>Pergunta ${i}</h4>
-                    <img onclick="selecionarPergunta()" src="./images/Vector.png" alt="">
+                <div class="campo-topo" onclick="selecionarPergunta(this)">
+                    <h4>Pergunta ${i+1}</h4>
+                    <img  src="./images/Vector.png" alt="">
                 </div>
                 <div class="campo-corpo escondido">
                     <div class="campo-perguntas">
                     
-                        <input type="text" placeholder="Texto da pergunta">
-                        <input type="text" placeholder="Cor de fundo da pergunta">
+                        <input type="text" class="titulo" placeholder="Texto da pergunta">
+                        <input type="text" class="hexa" placeholder="Cor de fundo da pergunta">
                     
                 </div>
                 
@@ -120,11 +122,15 @@ function renderizarPaginaTresDois(){
                 
                 
             </div>    
-            <div class="botao-informacoes">
-                Prosseguir pra criar níveis
-            </div>  
             </div>
         `
+    }
+    document.querySelector('.conteudo').innerHTML += 
+        `<div class="botao-informacoes">
+        Prosseguir pra criar níveis
+        </div>  
+        `
+    
 }
 function renderizarPaginaTresTres() {
     document.querySelector(".conteudo").innerHTML = ``;
@@ -132,6 +138,7 @@ function renderizarPaginaTresTres() {
 
 function avancaPerguntas(){
     if(verificarInformacoesBasicas()){
+        document.querySelector('.conteudo').innerHTML = ''
         renderizarPaginaTresDois();
     }  
     console.log(objetoPost);
@@ -180,7 +187,7 @@ function objetoNiveis(numero) {
     console.log(objetoPost.levels);
 }
 
-function selecionarPergunta(){
-    const campoCorpo = document.querySelector('.campo-corpo');
-    campoCorpo.classList.toggle('escondido');
+function selecionarPergunta(elemento){
+    const pai = elemento.parentNode;
+    pai.querySelector('.campo-corpo').classList.toggle('escondido')
 }
