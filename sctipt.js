@@ -57,7 +57,7 @@ function carregouSucesso (resposta) {
     
 }
 //------------executar aqui
-carregarPublicos();
+//carregarPublicos();
 
 function renderizarPaginaTresUm(){
     document.querySelector('.conteudo').innerHTML = 
