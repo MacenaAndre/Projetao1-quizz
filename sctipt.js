@@ -32,7 +32,6 @@ function carregarPublicos() {
         </div>
     `
 }
-
 function carregouErro (Erro) {
      alert("deu ruim");
 }
@@ -57,7 +56,7 @@ function carregouSucesso (resposta) {
     
 }
 //------------executar aqui
-//carregarPublicos();
+carregarPublicos();
 
 function renderizarPaginaTresUm(){
     document.querySelector('.conteudo').innerHTML = 
@@ -77,20 +76,68 @@ function renderizarPaginaTresUm(){
     `
 }
 function renderizarPaginaTresDois(){
-    document.querySelector('.conteudo').innerHTML = 
-    `<h1>AE</h1>`
+    document.querySelector('.conteudo').innerHTML += `<h3>Crie suas perguntas</h3>`
+    for(let i = 0; i < numPerguntas;i++){
+        document.querySelector('.conteudo').innerHTML += 
+            `<div class="page3-2">
+            
+        
+            <div class="campo">
+                <div class="campo-topo" onclick="selecionarPergunta(this)">
+                    <h4>Pergunta ${i+1}</h4>
+                    <img  src="./images/Vector.png" alt="">
+                </div>
+                <div class="campo-corpo escondido">
+                    <div class="campo-perguntas">
+                    
+                        <input type="text" class="titulo" placeholder="Texto da pergunta">
+                        <input type="text" class="hexa" placeholder="Cor de fundo da pergunta">
+                    
+                </div>
+                
+                    <div class="campo-perguntas">
+                        <h4>Resposta correta</h4>
+                        <input type="text" placeholder="Resposta correta">
+                        <input type="text" placeholder="URL da imagem">
+                    </div>
+                
+                    <div class="campo-perguntas">
+                        <h4>Respostas incorretas</h4>
+                        <input type="text" placeholder="Resposta incorreta 1">
+                        <input type="text" placeholder="URL da imagem 1">
+                    </div>
+                    
+                    <div class="campo-perguntas">
+                        <input type="text" placeholder="Resposta incorreta 2">
+                        <input type="text" placeholder="URL da imagem 2">
+                    </div>
+                    
+                    <div class="campo-perguntas">
+                        <input type="text" placeholder="Resposta incorreta 3">
+                        <input type="text" placeholder="URL da imagem 3">
+                    </div>
+                
+                </div>
+                
+                
+            </div>    
+            </div>
+        `
+    }
+    document.querySelector('.conteudo').innerHTML += 
+        `<div class="botao-informacoes" onclick="avancaFim()">
+              Prosseguir pra criar níveis
+        </div>  
+        `
+    
 }
-function renderizarPaginaTresTres() {
-    document.querySelector(".conteudo").innerHTML = ``;
-}
-
 function avancaPerguntas(){
     if(verificarInformacoesBasicas()){
+        document.querySelector('.conteudo').innerHTML = ''
         renderizarPaginaTresDois();
     }  
     console.log(objetoPost);
 }
-
 function verificarInformacoesBasicas(){
     const titulo = document.querySelector(".titulo").value;
     const url = document.querySelector(".url-quizz").value;
@@ -134,7 +181,7 @@ function objetoNiveis(numero) {
     }
     console.log(objetoPost.levels);
 }
-function objetoPerguntas (numero) {
+function objetoPerguntas(numero) {
     for(let i = 0; i < numPerguntas; i++) {
         objetoPost.questions.push({
             title: "",
@@ -144,16 +191,44 @@ function objetoPerguntas (numero) {
     }
     console.log(objetoPost.questions);
 }
-function avancaNiveis() {
-    if(verficiarNiveis()) {
-        //renderizarpaginatresquatro()
+function renderizarPaginaTresTres() {
+    document.querySelector('.conteudo').innerHTML = `<h3>Agora, decida os níveis!</h3>`
+    for(let i = 0; i < numNiveis; i++) {
+    document.querySelector(".conteudo").innerHTML += `
+        <div class="page3-3">
+            
+                <div class="campo">
+                    <div class="campo-topo" onclick="selecionarPergunta(this)">
+                        <div class="campo-niveis nivel${i}">
+                        <h4>Nível ${i + 1}</h4>
+                    </div>
+                    <div class="campo-corpo escondido">
+                        <input class="titulo-nivel" type="text" placeholder="Título do nível">
+                        <input class="pctg-nivel"type="text" placeholder="% de acerto mínima">
+                        <input class="url-nivel" type="text" placeholder="URL da imagem do nível">
+                        <input class="descricao-nivel" type="text" placeholder="Descrição do nível">
+                    </div>
+                </div>    
+        </div>
+    `;
     }
+    document.querySelector(".conteudo").innerHTML +=  `
+       <div class="botao-informacoes" onclick="">
+           Finalizar Quizz
+        </div>
+        `  
+}
+function avancaFim() {
+        renderizarPaginaTresTres()
 }
 function verficiarNiveis () {
-    const titulo = document.querySelector(".titulo-nivel").value;
-    const url = document.querySelector(".url-nivel").value;
-    const porcentagem = document.querySelector(".pctg-nivel").value;
-    const descricao = document.querySelector(".descricao-nivel").value;
+
+    for(i = 0; i < numNiveis; i++) {
+        let niveis = document.querySelector(`.nivel${i}`);
+        const titulo = niveis.querySelector(".nivel.titulo-nivel").value;
+        const url = niveis.querySelector(".url-nivel").value;
+        const porcentagem = niveis.querySelector(".pctg-nivel").value;
+        const descricao = niveis.querySelector(".descricao-nivel").value;
 
     if(titulo.length < 10)  {
         alert('O título precisa ter pelo menos 10 caractéres.');
@@ -171,6 +246,13 @@ function verficiarNiveis () {
         alert('O número mínimo de perguntas é 30.');
         return false;
     }
-
+}
     return true;
+}
+function renderizarpaginatresquatro() {
+    document.querySelector('.conteudo').innerHTML = `<p>alo</p>`
+}
+function selecionarPergunta(elemento){
+    const pai = elemento.parentNode;
+    pai.querySelector('.campo-corpo').classList.toggle('escondido')
 }

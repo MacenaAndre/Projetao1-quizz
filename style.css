@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@100;300;400;500;700&display=swap');
-
+*{
+    box-sizing: border-box;
+}
 body {
     font-family: 'Roboto';
     background-color: #fafafa;
@@ -121,21 +123,25 @@ body {
     font-weight: 700;
     display: initial;
 }
-.page3-1{
+.page3-1 {
     width: 100%;
 }
-.page3-2{
+.page3-2 {
     width: 100%;
 }
 .page3-3 {
     width: 100%;
 }
 .campo{
-    margin: 0 auto;
-    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px auto;
+    padding: 2px 0;
     width: 40%;
     background-color: white;
     box-shadow: 0px 0px 4px 0px #00000040;
+    overflow: hidden;
 }
 .campo input{
     margin: 10px;
@@ -149,7 +155,20 @@ body {
 }
 .campo-perguntas{
     width: 90%;
-    margin: 20px auto;
+}
+.campo-topo{
+    width: 90%;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.campo-topo h4{
+    font-weight: 700;
+}
+.campo-corpo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .botao-informacoes{
     background-color: #EC362D;
@@ -163,7 +182,12 @@ body {
     display: flex;
     cursor: pointer;
 }
-
+.escondido{
+    display: none;
+}
+.campo-nivel {
+        width: 90%;
+}
 @media (max-width: 1100px) {
 
      body {
