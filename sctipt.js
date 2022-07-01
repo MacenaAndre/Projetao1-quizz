@@ -2,7 +2,6 @@ let listaquizz;
 let numNiveis;
 let numPerguntas;
 let objetoPost = {
-    id: "", 
     title: "", 
     image: "", 
     levels: [], 
@@ -240,8 +239,10 @@ function verificarPerguntas(){
                 alert(`Caixa ${i+1}: Formato da URL Incorreta 3 está inválido, digite imagens em URL válidas`);
                 return;
             }
-        }      
+        }   
+
     }
+    listarPerguntas();
     renderizarPaginaTresTres();
 }
 
@@ -354,6 +355,38 @@ function listarNiveis () {
     }
     console.log(objetoPost);
 }
+
+function listarPerguntas(){
+    for(i = 0; i < numPerguntas; i++){
+        let caixaPergunta = document.querySelector(`.pergunta${i}`);
+        const tituloPergunta = caixaPergunta.querySelector('.titulo-pergunta').value;
+        const hexaPergunta = caixaPergunta.querySelector('.hexa-pergunta').value;
+        const respostaCorreta = caixaPergunta.querySelector('.resposta-correta').value;
+        const urlCorreta = caixaPergunta.querySelector('.url-correta').value;
+        const respostaIncorreta1 = caixaPergunta.querySelector('.resposta-incorreta1').value;
+        const urlIncorreta1 = caixaPergunta.querySelector('.url-incorreta1').value;
+        const respostaIncorreta2 = caixaPergunta.querySelector('.resposta-incorreta2').value;
+        const urlIncorreta2 = caixaPergunta.querySelector('.url-incorreta2').value;
+        const respostaIncorreta3 = caixaPergunta.querySelector('.resposta-incorreta3').value;
+        const urlIncorreta3 = caixaPergunta.querySelector('.url-incorreta3').value;
+        objetoPost.questions[i].title = tituloPergunta;
+        objetoPost.questions[i].color = hexaPergunta;   
+        objetoPost.questions[i].answers.push({
+            text:respostaCorreta,
+            image:urlCorreta,
+            isCorrect:true
+        }); 
+        for(let j = 1; j < 4; j++){
+            objetoPost.questions[i].answers.push({
+                text:`respostaIncorreta${j}`,
+                image:`respostaIncorreta${j}`,
+                isCorrect:false
+            }); 
+        }
+    }
+    console.log(objetoPost);
+}
+
 function renderizarpaginaTresQuatro() {
     document.querySelector('.conteudo').innerHTML = `<p>alo</p>`
 }
