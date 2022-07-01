@@ -56,7 +56,7 @@ function carregouSucesso (resposta) {
     
 }
 //------------executar aqui
-carregarPublicos();
+//carregarPublicos();
 
 function renderizarPaginaTresUm(){
     document.querySelector('.conteudo').innerHTML = 
@@ -250,7 +250,6 @@ function validarHexa(hexa){
     console.log(reg.test(hexa))
     return reg.test(hexa);
 }
-
 function objetoNiveis(numero) {
     for(let i = 0; i < numNiveis; i++) {
         objetoPost.levels.push({
