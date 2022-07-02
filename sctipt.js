@@ -110,7 +110,8 @@ function objetoNiveis() {
         objetoPost.levels.push({
             title: "",
             image: "",
-            text: ""
+            text: "",
+            minValue: 0
         })
     }
     console.log(objetoPost.levels);
@@ -250,7 +251,6 @@ function validarHexa(hexa){
     console.log(reg.test(hexa))
     return reg.test(hexa);
 }
-
 function renderizarPaginaTresTres() {
     document.querySelector('.conteudo').innerHTML = `<h3>Agora, decida os níveis!</h3>`
     for(let i = 0; i < numNiveis; i++) {
@@ -364,25 +364,25 @@ function listarPerguntas(){
         objetoPost.questions[i].answers.push({
             text:respostaCorreta,
             image:urlCorreta,
-            isCorrect:true
+            isCorrectAnswer:true
         }); 
         objetoPost.questions[i].answers.push({
             text: respostaIncorreta1,
             image:urlIncorreta1,
-            isCorrect:false
+            isCorrectAnswer:false
         });
         if(respostaIncorreta2 !== "" && urlIncorreta2 !== ""){
             objetoPost.questions[i].answers.push({
                 text: respostaIncorreta2,
                 image:urlIncorreta2,
-                isCorrect:false
+                isCorrectAnswer:false
             }); 
         }
         if(respostaIncorreta3 !== "" && urlIncorreta3 !== ""){
             objetoPost.questions[i].answers.push({
                 text: respostaIncorreta3,
                 image:urlIncorreta3,
-                isCorrect:false
+                isCorrectAnswer:false
             }); 
         }
         
@@ -390,7 +390,6 @@ function listarPerguntas(){
     }
     console.log(objetoPost);
 }
-
 function renderizarpaginaTresQuatro() {
     document.querySelector('.conteudo').innerHTML = `<p>alo</p>`
 }
