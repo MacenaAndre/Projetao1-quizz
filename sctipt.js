@@ -4,8 +4,8 @@ let numPerguntas;
 let objetoPost = {
     title: "", 
     image: "", 
-    levels: [], 
-    questions: []
+    questions: [],
+    levels: []
 };
 
 function carregarPublicos() {
@@ -111,7 +111,7 @@ function objetoNiveis() {
             title: "",
             image: "",
             text: "",
-            minValue: 0
+            minValeu: ""
         })
     }
     console.log(objetoPost.levels);
@@ -247,7 +247,7 @@ function verificarPerguntas(){
 }
 
 function validarHexa(hexa){
-    let reg=/^#([0-9a-f]{3}){1,2}$/i;
+    let reg=/^#([0-9a-f]{6}){1,2}$/i;
     console.log(reg.test(hexa))
     return reg.test(hexa);
 }
@@ -335,6 +335,7 @@ function verficiarNiveis() {
         return false;
     }
     listarNiveis();
+    enviarQuizz();
     renderizarpaginaTresQuatro();
 }
 function listarNiveis () {
@@ -356,6 +357,17 @@ function listarNiveis () {
     console.log(objetoPost);
 }
 
+function enviarQuizz(){
+    const promise = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes',objetoPost);
+    promise.then( resposta =>{
+        console.log(resposta)
+    });
+    promise.catch(()=>{
+        alert('Deu erro :(');
+    });
+}
+
+
 function listarPerguntas(){
     for(i = 0; i < numPerguntas; i++){
         let caixaPergunta = document.querySelector(`.pergunta${i}`);
@@ -376,13 +388,27 @@ function listarPerguntas(){
             image:urlCorreta,
             isCorrect:true
         }); 
-        for(let j = 1; j < 4; j++){
+        objetoPost.questions[i].answers.push({
+            text: respostaIncorreta1,
+            image:urlIncorreta1,
+            isCorrect:false
+        });
+        if(respostaIncorreta2 !== "" && urlIncorreta2 !== ""){
             objetoPost.questions[i].answers.push({
-                text:`respostaIncorreta${j}`,
-                image:`respostaIncorreta${j}`,
+                text: respostaIncorreta2,
+                image:urlIncorreta2,
                 isCorrect:false
             }); 
         }
+        if(respostaIncorreta3 !== "" && urlIncorreta3 !== ""){
+            objetoPost.questions[i].answers.push({
+                text: respostaIncorreta3,
+                image:urlIncorreta3,
+                isCorrect:false
+            }); 
+        }
+        
+        
     }
     console.log(objetoPost);
 }
