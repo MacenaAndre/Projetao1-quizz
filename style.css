@@ -269,6 +269,79 @@ h6 {
    color: #818181;
    cursor: pointer;
 }
+.capa {
+    height: 230px;
+    width: 100%;
+    object-fit: cover;
+    position: relative;
+}
+.page2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.degrade2 {
+    position: absolute;
+    top: 69px;
+    height: 230px;
+    width: 100%;
+    object-fit: cover;
+    background: #00000091;
+}
+.jogo-quizz {
+    height: auto;
+    width: 760px;
+    margin-top: 42px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px 0px #0000000D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.cor-quizz {
+    width: 690px;
+    height: 138px;
+    background-color: aqua;
+    color: #FFFFFF;
+    margin-top: 28px;
+    margin-bottom: 20px;
+    font-size: 23px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    word-break: break-all;
+
+}
+.img-jogo {
+    width: 330px;
+    height: 175px;
+}
+.alternativas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+.alternativa {
+    padding: 10px 14px;
+}
+h5 {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: left;
+    margin-top: 12px;
+}
+.correta {
+    color: #009C22;
+}
+.incorreta {
+    color: #FF0B0B;
+    opacity: 0.4;
+}
 @media (max-width: 1100px) {
 
      body {
