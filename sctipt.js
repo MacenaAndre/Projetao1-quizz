@@ -10,7 +10,7 @@ let objetoPost = {
 
 function carregarPublicos() {
 
-    const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
+    const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes");
 
     promise.catch(carregouErro);
     promise.then(carregouSucesso);
@@ -41,7 +41,7 @@ function carregouSucesso (resposta) {
 
     elemento.innerHTML = "";
 
-    for(let i = listaquizz.length - 6; i < listaquizz.length; i++) {
+    for(let i = 0; i < listaquizz.length; i++) {
         elemento.innerHTML += `
         <div class="quizz">
             <img class="img-quizz" src="${listaquizz[i].image}" alt="">
@@ -55,7 +55,7 @@ function carregouSucesso (resposta) {
     
 }
 //------------executar aqui
-carregarPublicos();
+//carregarPublicos();
 
 function renderizarPaginaTresUm(){
     document.querySelector('.conteudo').innerHTML = 
@@ -314,7 +314,6 @@ function verficiarNiveis() {
     }
     listarNiveis();
     enviarQuizz();
-    renderizarpaginaTresQuatro();
 }
 function listarNiveis () {
 
@@ -336,8 +335,9 @@ function listarNiveis () {
 }
 
 function enviarQuizz(){
-    const promise = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes',objetoPost);
+    const promise = axios.post('https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes',objetoPost);
     promise.then( resposta =>{
+        renderizarpaginaTresQuatro();
         console.log(resposta)
     });
     promise.catch(()=>{
@@ -391,7 +391,24 @@ function listarPerguntas(){
     console.log(objetoPost);
 }
 function renderizarpaginaTresQuatro() {
-    document.querySelector('.conteudo').innerHTML = `<p>alo</p>`
+    document.querySelector('.conteudo').innerHTML = `
+    <div class="page3-4">
+        <h3>Seu quizz está pronto!</h3>
+    
+                <div class="quizz-pronto">
+                    <img class="img-quizz-pronto" src="${objetoPost.image}" alt="">
+                    <div class="degrade-pronto"></div>
+                    <div class="centralizar-titulo-pronto">
+                        <p class="titulo-quizz-pronto">${objetoPost.title}</p>
+                    </div>    
+                </div>
+
+        <div class="botao-jogar" onclick="renderizarPaginaDois()">
+            Acessar Quizz
+        </div>  
+        <h6 onclick="rendrerizarHome()">Voltar pra home</h6>
+    </div>
+    `
 }
 function selecionarPergunta(elemento){
     const pai = elemento.parentNode;
@@ -399,4 +416,11 @@ function selecionarPergunta(elemento){
 }
 function avancaNiveis() {
     renderizarPaginaTresTres()
+}
+//----------------novo-----------------
+function rendrerizarHome() {
+    carregarPublicos();
+}
+function renderizarPaginaDois() {
+    document.querySelector(".conteudo").innerHTML = "<p>VAMOOOOOW</p>"
 }

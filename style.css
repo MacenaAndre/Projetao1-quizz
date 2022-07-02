@@ -27,6 +27,11 @@ body {
     margin-top: 7px;
     box-sizing: border-box;
 }
+.page1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .texto-usuario {
     width: 250px;
     font-size: 20px;
@@ -36,7 +41,7 @@ body {
 }
 .quizz-usuario {
     height: 181px;
-    width: 1055px;
+    width: 1035px;
     border-radius: 5px;
     border: 1px dashed #D4D4D4;
     display: flex;
@@ -63,41 +68,45 @@ body {
 .titulo-publico {
     font-size: 20px;
     font-weight: 700;
+    padding-left: 10px;
 }
 .quizzes{
     display: flex;
     flex-wrap: wrap;
     width: 1055px;
     box-sizing: border-box;
-    justify-content: space-between;
+    
 }
 .quizz {
     height: 181px;
-    width: 340px;
-    margin: 12px 0px 12px 0px;
+    width: 330px;
+    margin: 10px;
     position: relative;
     box-sizing: border-box;
     cursor: pointer;
+    word-break: break-all;
 }
 .img-quizz {
     height: 181px;
-    width: 340px;
+    width: 330px;
     border-radius: 5px;
-    object-fit: cover;         /* tem que acertar o ajuste da imagem depois, imagem loagding*/
+    object-fit: cover;         
     cursor: pointer;
+    word-break: break-all;
 }
 .degrade {
     height: 181px;
-    width: 340px;
+    width: 330px;
     border-radius: 5px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.1%, #000000 100%);
     position: absolute;
     top: 0px;
+    word-break: break-all;
 }
 .centralizar-titulo {
     position: absolute;
     top: 75%;
-    width: 340px;
+    width: 330px;
     height: 15%;
     display: flex;
     align-items: center;
@@ -105,9 +114,9 @@ body {
 }
 .titulo-quizz {
     padding: 0px 18px;
-    max-width: 320px;
+    max-width: 322px;
     width: 100%;
-    word-break: normal;
+    word-break: break-all;
     font-size: 19px;
     font-weight: 400;
     text-align: left;
@@ -118,6 +127,7 @@ body {
     margin: 40px 0;
     text-align: center;
     font-weight: 700;
+    font-size: 23px;
 }
 .campo-perguntas h4{
     font-weight: 700;
@@ -131,6 +141,12 @@ body {
 }
 .page3-3 {
     width: 100%;
+}
+.page3-4 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .campo{
     display: flex;
@@ -188,6 +204,144 @@ body {
 .campo-nivel {
         width: 90%;
 }
+.quizz-pronto {
+    height: 270px;
+    width: 500px;
+    margin: 12px 10px;
+    position: relative;
+    box-sizing: border-box;
+    cursor: pointer;
+    word-break: break-all;
+}
+.img-quizz-pronto {
+    height: 270px;
+    width: 500px;
+    border-radius: 5px;
+    object-fit: cover;         
+    cursor: pointer;
+    word-break: break-all;
+}
+.degrade-pronto {
+    height: 270px;
+    width: 500px;
+    border-radius: 5px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.1%, #000000 100%);
+    position: absolute;
+    top: 0px;
+    word-break: break-all;
+}
+.centralizar-titulo-pronto {
+    position: absolute;
+    top: 80%;
+    width: 500px;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    word-break: break-all;
+}
+.titulo-quizz-pronto {
+    padding: 0px 18px;
+    max-width: 480px;
+    width: 100%;
+    word-break: break-all;
+    font-size: 19px;
+    font-weight: 400;
+    text-align: left;
+    color: white;
+    z-index: 1;
+}
+.botao-jogar{
+    background-color: #EC362D;
+    color: #FFF5F4;
+    width: 220px;
+    min-height: 50px;
+    border-radius: 12px;
+    margin: 30px auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+}
+h6 {
+   font-size: 21px;
+   font-weight: 400;
+   text-align: center;
+   color: #818181;
+   cursor: pointer;
+}
+.capa {
+    height: 230px;
+    width: 100%;
+    object-fit: cover;
+    position: relative;
+}
+.page2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.degrade2 {
+    position: absolute;
+    top: 69px;
+    height: 230px;
+    width: 100%;
+    object-fit: cover;
+    background: #00000091;
+}
+.jogo-quizz {
+    height: auto;
+    width: 760px;
+    margin-top: 42px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px 0px #0000000D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.cor-quizz {
+    width: 690px;
+    height: 138px;
+    background-color: aqua;
+    color: #FFFFFF;
+    margin-top: 28px;
+    margin-bottom: 20px;
+    font-size: 23px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    word-break: break-all;
+
+}
+.img-jogo {
+    width: 330px;
+    height: 175px;
+}
+.alternativas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+.alternativa {
+    padding: 10px 14px;
+}
+h5 {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: left;
+    margin-top: 12px;
+}
+.correta {
+    color: #009C22;
+}
+.incorreta {
+    color: #FF0B0B;
+    opacity: 0.4;
+}
 @media (max-width: 1100px) {
 
      body {
@@ -199,11 +353,11 @@ body {
         width: 100%;
     }
     .page1 {
-        width: 50%;
-        min-width: 340px;
+        width: 100%;
+        min-width: 330px;
     }
     .quizz-usuario {
-        width: 100%;
+        width: 98%;
     }
     .quizzes {
         width: 100%;
@@ -224,12 +378,38 @@ body {
     }
     .centralizar-titulo {
         width: 100%;
-        min-width: 340px;
+        min-width: 330px;
     }
     .titulo-publico {
         width: 100%;
     }
     .degrade {
         width: 100%;
+    }
+    .titulo-quizz {
+        width: 100%;
+        max-width: 100%;
+        min-width: 322px;
+    }
+    .quizz-pronto {
+        height: 181px;
+        width: 95%;
+    }
+    .img-quizz-pronto {
+        height: 181px;
+        width: 100%;
+    }
+    .degrade-pronto {
+        height: 181px;
+        width: 100%;
+    }
+    .centralizar-titulo-pronto {
+        top: 75%;
+        width: 100%;
+        min-width: 330px;
+    }
+    .titulo-quizz-pronto {
+        width: 100%;
+        min-width: 322px;
     }
 }
