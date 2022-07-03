@@ -2,6 +2,7 @@ let listaquizz;
 let arrayUsuario;
 let numNiveis;
 let numPerguntas;
+let arrayIds;
 let objetoPost = {
     title: "", 
     image: "", 
@@ -11,13 +12,11 @@ let objetoPost = {
 
 
 function carregarPublicos() {
-
-    const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes");
-
-    promise.catch(carregouErro);
-    promise.then(carregouSucesso);
+    if(arrayIds === undefined){
+        arrayIds = localStorage.ids;
+    }
     const pag1 = document.querySelector(".conteudo");
-    if(localStorage.length > 0){
+    if(arrayIds.length > 0){
         pag1.innerHTML = 
         `  
             <div class="page1">
@@ -26,6 +25,9 @@ function carregarPublicos() {
                     <p class="titulo-publico">Seus Quizzes</p>
                     <ion-icon name="add-circle" onclick="renderizarPaginaTresUm()"></ion-icon>
                 </div>   
+                <div class="quizzes-seu">
+                
+                </div>
             </div>
             <div class="quizz-publico">
                 <p class="titulo-publico">Todos os Quizzes</p>
@@ -41,39 +43,73 @@ function carregarPublicos() {
         pag1.innerHTML = `
         <div class="page1">
                 <div class="quizz-usuario">
-                <p class="texto-usuario">Você não criou nenhum quizz ainda :(</p>
-                <div class="botao-criar" onclick="renderizarPaginaTresUm()">Criar Quizz</div>
+                    <p class="texto-usuario">Você não criou nenhum quizz ainda :(</p>
+                    <div class="botao-criar" onclick="renderizarPaginaTresUm()">Criar Quizz</div>
                 </div>
                 <div class="quizz-publico">
                     <p class="titulo-publico">Todos os Quizzes</p>
                     <div class="quizzes">
                         <!-- adicionar imagem de loading depois -->
+                        <h1>fff<h1>
                     </div>
                 </div>
             </div>
         `
     }
-    
+    const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes");
+    arrayIds = JSON.parse(localStorage.ids);
+    promise.catch(carregouErro);
+    promise.then(pegaQuizzUsuario);
+    promise.then(carregouSucesso); 
+   
 }
+
+
 function carregouErro (Erro) {
      alert("deu ruim");
 }
 
-function carregouQuizzesUsuario(){
-    const elemento = document.querySelector("quizzes:first-child");
-    elemento.innerHTML = "";
+function carregouQuizzesUsuario(quizz){
+    console.log(quizz)
+    const elemento = document.querySelector(".quizzes-seu");
     for(let i = 0; i < localStorage.length;i++){
         elemento.innerHTML += 
         `
         <div class="quizz">
-            <img class="img-quizz" src="${listaquizz[i].image}" alt="">
+            <img class="img-quizz" src="${quizz.data.image}" alt="">
             <div class="degrade"></div>
             <div class="centralizar-titulo">
-                <p class="titulo-quizz">${listaquizz[i].title}</p>
+                <p class="titulo-quizz">${quizz.data.title}</p>
             </div>    
         </div>
         `
     }
+}
+function verificaQuizzUsuario(listaquizz){
+    console.log(listaquizz.id, arrayIds)
+    for(let i = 0; i < arrayIds.length;i++){
+        if(listaquizz.id === arrayIds[i]){
+            return `
+                    <div class="quizz escondido">
+                        <img class="img-quizz" src="${listaquizz.image}" alt="">
+                        <div class="degrade"></div>
+                        <div class="centralizar-titulo">
+                        <p class="titulo-quizz">${listaquizz.title}</p>
+                        </div>    
+                    </div>
+                    `     ;
+        }
+    }
+    return `
+    <div class="quizz">
+        <img class="img-quizz" src="${listaquizz.image}" alt="">
+        <div class="degrade"></div>
+        <div class="centralizar-titulo">
+        <p class="titulo-quizz">${listaquizz.title}</p>
+        </div>    
+    </div>
+    `     ;
+    
 }
 
 function carregouSucesso (resposta) {
@@ -84,15 +120,7 @@ function carregouSucesso (resposta) {
     elemento.innerHTML = "";
 
     for(let i = 0; i < listaquizz.length; i++) {
-        elemento.innerHTML += `
-        <div class="quizz">
-            <img class="img-quizz" src="${listaquizz[i].image}" alt="">
-            <div class="degrade"></div>
-            <div class="centralizar-titulo">
-                <p class="titulo-quizz">${listaquizz[i].title}</p>
-            </div>    
-        </div>
-        `
+        elemento.innerHTML +=  verificaQuizzUsuario(listaquizz[i])
     }
     
 }
@@ -406,6 +434,7 @@ function acumalarIds(id){
         arrayUsuario = JSON.stringify(arrayUsuario);
         localStorage.ids = arrayUsuario;
   }
+  arrayIds = JSON.parse(localStorage.ids);
 }
 
 
@@ -489,3 +518,11 @@ function renderizarPaginaDois() {
     document.querySelector(".conteudo").innerHTML = "<p>VAMOOOOOW</p>"
 }
 
+function pegaQuizzUsuario(){
+    for(let i = 0; i < arrayIds.length; i++){
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/${arrayIds[i]}`);
+        promise.then(carregouQuizzesUsuario);
+        promise.catch(carregouErro)
+    }
+    
+}

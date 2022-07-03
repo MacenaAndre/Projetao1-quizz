@@ -81,6 +81,12 @@ body {
     box-sizing: border-box;
     
 }
+.quizzes-seu{
+    display: flex;
+    flex-wrap: wrap;
+    width: 1055px;
+    box-sizing: border-box;
+}
 .quizz {
     height: 181px;
     width: 330px;
@@ -379,6 +385,11 @@ h5 {
         margin: 30px 0 18px  0;
     }
     .quizzes {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .quizzes-seu{
         width: 100%;
         display: flex;
         justify-content: center;
