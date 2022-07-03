@@ -17,7 +17,7 @@ body {
     box-shadow: 0px 4px 4px 0px #00000040;
     font-size: 37px;
     font-weight: 700;
-    z-index: 1;
+    z-index: 3;
 }
 .conteudo {
     display: flex;
@@ -51,6 +51,9 @@ body {
     flex-direction: column;
     box-sizing: border-box;
 }
+.quizz-usuario-pronto{
+    margin: 69px 0 48px  0;
+}
 .botao-criar {
     height: 40px;
     width: 151px;
@@ -69,6 +72,7 @@ body {
     font-size: 20px;
     font-weight: 700;
     padding-left: 10px;
+    margin-right: 10px;
 }
 .quizzes{
     display: flex;
@@ -250,6 +254,15 @@ body {
     color: white;
     z-index: 1;
 }
+.caixa-titulo{
+    display:flex;
+    align-items: center;
+}
+.caixa-titulo ion-icon{
+    color: #EC362D;
+    font-size: 32px;
+    cursor: pointer;
+}
 .botao-jogar{
     background-color: #EC362D;
     color: #FFF5F4;
@@ -310,7 +323,6 @@ h6 {
 .cor-quizz {
     width: 690px;
     height: 138px;
-    background-color: aqua;
     color: #FFFFFF;
     margin-top: 28px;
     margin-bottom: 20px;
@@ -322,6 +334,21 @@ h6 {
     text-align: center;
     word-break: break-all;
 
+}
+.cor-resultado {
+    width: 690px;
+    height: 138px;
+    background-color: ;
+    color: #FFFFFF;
+    margin-top: 28px;
+    margin-bottom: 20px;
+    font-size: 23px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    word-break: break-all;
 }
 .img-jogo {
     width: 330px;
@@ -360,19 +387,34 @@ h5 {
     height: 273px;
     width: 364px;
     margin-right: 10px;
+    margin-bottom: 10px;
     object-fit: cover;
 }
 .descricao {
     height: 250px;
     width: 308px;
     margin-left: 10px;
+    font-size: 19px;
+    font-weight: 700;
+    text-align: left;
+
 }
 .margem {
     margin-bottom: 85px;
 }
-.resultado {
-    margin-bottom: 28px;
+.botao-reiniciar {
+    background-color: #EC362D;
+    color: #FFF5F4;
+    width: 220px;
+    min-height: 50px;
+    border-radius: 12px;
+    margin: 48px auto 30px auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
 }
+
 @media (max-width: 1100px) {
 
      body {
@@ -388,7 +430,13 @@ h5 {
         min-width: 330px;
     }
     .quizz-usuario {
+        width: 96%;
+    }
+    .quizz-usuario-pronto{
         width: 98%;
+        display: flex;
+        flex-direction: column;
+        margin: 30px 0 18px  0;
     }
     .quizzes {
         width: 100%;
@@ -396,10 +444,10 @@ h5 {
         justify-content: center;
     }
     .quizz-publico {
+        width: 98%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        text-align: center;
     }
     .quizz {
         width: 100%;
@@ -413,6 +461,7 @@ h5 {
     }
     .titulo-publico {
         width: 100%;
+        margin-right: 0;
     }
     .degrade {
         width: 100%;

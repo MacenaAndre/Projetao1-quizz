@@ -1,6 +1,8 @@
 let listaquizz;
+let arrayUsuario;
 let numNiveis;
 let numPerguntas;
+let acertos = 0;
 let objetoPost = {
     title: "", 
     image: "", 
@@ -8,36 +10,77 @@ let objetoPost = {
     levels: []
 };
 
+
 function carregarPublicos() {
 
     const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes");
 
     promise.catch(carregouErro);
     promise.then(carregouSucesso);
-
     const pag1 = document.querySelector(".conteudo");
-    pag1.innerHTML = `
-    <div class="page1">
-            <div class="quizz-usuario">
-               <p class="texto-usuario">Você não criou nenhum quizz ainda :(</p>
-               <div class="botao-criar" onclick="renderizarPaginaTresUm()">Criar Quizz</div>
-            </div>
-            <div class="quizz-publico">
-                <p class="titulo-publico">Todos os Quizzes</p>
-                <div class="quizzes">
-                    <!-- adicionar imagem de loading depois -->
+    if(localStorage.length > 0){
+        pag1.innerHTML = 
+        `  
+            <div class="page1">
+                <div class="quizz-usuario-pronto">
+                    <div class="caixa-titulo">
+                        <p class="titulo-publico">Seus Quizzes</p>
+                        <ion-icon name="add-circle" onclick="renderizarPaginaTresUm()"></ion-icon>
+                    </div>   
+                </div>
+                <div class="quizz-publico">
+                    <p class="titulo-publico">Todos os Quizzes</p>
+                    <div class="quizzes">
+                        <!-- adicionar imagem de loading depois -->
+            
+                    </div>
                 </div>
             </div>
+        `
+    }
+    else{
+        pag1.innerHTML = `
+        <div class="page1">
+                <div class="quizz-usuario">
+                    <p class="texto-usuario">Você não criou nenhum quizz ainda :(</p>
+                    <div class="botao-criar" onclick="renderizarPaginaTresUm()">Criar Quizz</div>
+                </div>
+                <div class="quizz-publico">
+                    <p class="titulo-publico">Todos os Quizzes</p>
+                    <div class="quizzes">
+                        <!-- adicionar imagem de loading depois -->
+                    </div>
+                </div>
         </div>
-    `
+        `
+    }
+    
 }
 function carregouErro (Erro) {
-     alert("deu ruim");
+     alert("Erro ao carregar os quizzes!");
 }
+
+function carregouQuizzesUsuario(){
+    const elemento = document.querySelector("quizzes:first-child");
+    elemento.innerHTML = "";
+    for(let i = 0; i < localStorage.length;i++){
+        elemento.innerHTML += 
+        `
+        <div class="quizz">
+            <img class="img-quizz" src="${listaquizz[i].image}" alt="">
+            <div class="degrade"></div>
+            <div class="centralizar-titulo">
+                <p class="titulo-quizz">${listaquizz[i].title}</p>
+            </div>    
+        </div>
+        `
+    }
+}
+
 function carregouSucesso (resposta) {
     console.log(resposta.data)
     listaquizz = resposta.data;
-    const elemento = document.querySelector(".quizzes");
+    const elemento = document.querySelector(".quizzes:last-child");
 
     elemento.innerHTML = "";
 
@@ -55,7 +98,7 @@ function carregouSucesso (resposta) {
     
 }
 //------------executar aqui
-//carregarPublicos();
+carregarPublicos();
 
 function renderizarPaginaTresUm(){
     document.querySelector('.conteudo').innerHTML = 
@@ -337,13 +380,35 @@ function listarNiveis () {
 function enviarQuizz(){
     const promise = axios.post('https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes',objetoPost);
     promise.then( resposta =>{
-        renderizarpaginaTresQuatro();
-        console.log(resposta)
+        renderizarpaginaTresQuatro();    
+        console.log(resposta);
+        console.log(resposta.data.id);
+        acumalarIds(resposta.data.id);
+        console.log(localStorage);
     });
     promise.catch(()=>{
         alert('Deu erro :(');
     });
 }
+
+function acumalarIds(id){
+   let idLocal = id;
+   if(localStorage.length===0){
+         localStorage.setItem("ids","[]");
+         arrayUsuario = localStorage.ids;
+         arrayUsuario = JSON.parse(arrayUsuario);
+         arrayUsuario.push(idLocal);
+         arrayUsuario = JSON.stringify(arrayUsuario);
+         localStorage.ids = arrayUsuario;
+  }	else{
+        arrayUsuario = localStorage.ids;
+        arrayUsuario = JSON.parse(arrayUsuario);
+        arrayUsuario.push(idLocal);
+        arrayUsuario = JSON.stringify(arrayUsuario);
+        localStorage.ids = arrayUsuario;
+  }
+}
+
 
 function listarPerguntas(){
     for(i = 0; i < numPerguntas; i++){
@@ -418,8 +483,69 @@ function avancaNiveis() {
 }
 //----------------novo-----------------
 function renderizarHome() {
+    document.querySelector("style").innerHTML += ""
     carregarPublicos();
 }
 function renderizarPaginaDois() {
-    document.querySelector(".conteudo").innerHTML = "<p>VAMOOOOOW</p>"
+
+    const content = document.querySelector(".conteudo");
+    content.classList.add("juntar");
+    content.innerHTML = `
+    <div class="page2">
+        <img class="capa" src="${objetoPost.image}" alt="">
+        <div class="degrade2">${objetoPost.title}</div>
+    </div>
+    `
+
+    for(let i = 0; i < numPerguntas; i++) {
+        document.querySelector(".page2").innerHTML += `
+        <div class="jogo-quizz">
+            <div class="cor-quizz c${i + 1}">${objetoPost.questions[i].title}</div>
+            <div class="alternativas alt${i + 1}">
+            </div>    
+        </div>
+        `
+        document.querySelector("style").innerHTML += `
+            .c${i +1} {
+                background-color: ${objetoPost.questions[i].color};
+            }
+        `
+        //alterarCor(objetoPost.questions[i].color)
+
+        for(let j = 0; j < objetoPost.questions[i].answers.length; j++) {
+            document.querySelector(`.alt${i + 1}`).innerHTML += `
+                <div class="alternativa numb${j + 1}" onclick="selecionarAlternativa(this)">
+                    <img class="img-jogo "src="${objetoPost.questions[i].answers[j].image}" alt="">
+                    <h5>${objetoPost.questions[i].answers[j].text}</h5>
+                    <div class="escondido gabarito">${objetoPost.questions[i].answers[j].isCorrectAnswer}</div>
+                </div>
+            `
+        }    
+    }
+
+    document.querySelector(".page2").innerHTML += `
+        <div class="exibir-resultado">
+        </div>
+        <div class="botao-reiniciar" onclick="reiniciarQuizz()">
+            Reiniciar Quizz
+        </div>  
+        <h6 class="margem" onclick="renderizarHome()">Voltar pra home</h6> 
+    `
 }
+function selecionarAlternativa(alternativa) {
+    let limitador = 0
+    let resposta = alternativa.querySelector(".gabarito");
+    if(resposta.innerHTML === "true") {
+       console.log("boa");
+       limitador ++
+    } else {
+       console.log("baaaad");
+       limitador ++
+    }
+}
+function alterarCor(cor) {
+    let declaration = document.styleSheets[2].cssRules[45].style;
+    let corfundo = declaration.setProperty("background-color", cor);
+}
+//function reiniciarQuizz() {document.querySelector("style").innerHTML += ""}
+//exibirResultado()
