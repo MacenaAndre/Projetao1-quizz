@@ -288,6 +288,13 @@ h6 {
     width: 100%;
     object-fit: cover;
     background: #00000091;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 400;
+    color: #ffffff;
 }
 .jogo-quizz {
     height: auto;
@@ -328,6 +335,8 @@ h6 {
 }
 .alternativa {
     padding: 10px 14px;
+    max-width: 360px;
+    word-break: normal;
 }
 h5 {
     font-size: 20px;
@@ -340,7 +349,29 @@ h5 {
 }
 .incorreta {
     color: #FF0B0B;
+}
+.nao-clicada {
     opacity: 0.4;
+}
+.juntar {
+    margin-top: 0px;
+}
+.resultado-img {
+    height: 273px;
+    width: 364px;
+    margin-right: 10px;
+    object-fit: cover;
+}
+.descricao {
+    height: 250px;
+    width: 308px;
+    margin-left: 10px;
+}
+.margem {
+    margin-bottom: 85px;
+}
+.resultado {
+    margin-bottom: 28px;
 }
 @media (max-width: 1100px) {
 

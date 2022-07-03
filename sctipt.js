@@ -345,7 +345,6 @@ function enviarQuizz(){
     });
 }
 
-
 function listarPerguntas(){
     for(i = 0; i < numPerguntas; i++){
         let caixaPergunta = document.querySelector(`.pergunta${i}`);
@@ -406,7 +405,7 @@ function renderizarpaginaTresQuatro() {
         <div class="botao-jogar" onclick="renderizarPaginaDois()">
             Acessar Quizz
         </div>  
-        <h6 onclick="rendrerizarHome()">Voltar pra home</h6>
+        <h6 onclick="renderizarHome()">Voltar pra home</h6>
     </div>
     `
 }
@@ -418,7 +417,7 @@ function avancaNiveis() {
     renderizarPaginaTresTres()
 }
 //----------------novo-----------------
-function rendrerizarHome() {
+function renderizarHome() {
     carregarPublicos();
 }
 function renderizarPaginaDois() {
