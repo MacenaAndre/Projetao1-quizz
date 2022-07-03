@@ -502,4 +502,10 @@ h5 {
         width: 100%;
         min-width: 322px;
     }
+    .campo{
+        width: 100%;
+    }
+    .botao-informacoes{
+        width: 90%;
+    }
 }
