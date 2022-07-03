@@ -81,6 +81,12 @@ body {
     box-sizing: border-box;
     
 }
+.quizzes-seu{
+    display: flex;
+    flex-wrap: wrap;
+    width: 1055px;
+    box-sizing: border-box;
+}
 .quizz {
     height: 181px;
     width: 330px;
@@ -338,7 +344,7 @@ h6 {
 .cor-resultado {
     width: 690px;
     height: 138px;
-    background-color: ;
+    background-color: #EC362D;
     color: #FFFFFF;
     margin-top: 28px;
     margin-bottom: 20px;
@@ -414,7 +420,6 @@ h5 {
     display: flex;
     cursor: pointer;
 }
-
 @media (max-width: 1100px) {
 
      body {
@@ -439,6 +444,11 @@ h5 {
         margin: 30px 0 18px  0;
     }
     .quizzes {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .quizzes-seu{
         width: 100%;
         display: flex;
         justify-content: center;
