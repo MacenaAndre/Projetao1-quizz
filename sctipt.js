@@ -541,6 +541,8 @@ function renderizarPaginaDois() {
             }
         `
         //alterarCor(objetoPost.questions[i].color)
+        objetoPost.questions[i].answers.sort(embaralhar);
+        
 
         for(let j = 0; j < objetoPost.questions[i].answers.length; j++) {
             document.querySelector(`.alt${i + 1}`).innerHTML += `
@@ -573,9 +575,8 @@ function selecionarAlternativa(alternativa) {
        limitador ++
     }
 }
-function alterarCor(cor) {
-    let declaration = document.styleSheets[2].cssRules[45].style;
-    let corfundo = declaration.setProperty("background-color", cor);
+function embaralhar () {
+    return Math.random() - 0.5; 
 }
 //function reiniciarQuizz() {document.querySelector("style").innerHTML += ""}
 //exibirResultado()
