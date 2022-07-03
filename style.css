@@ -51,6 +51,9 @@ body {
     flex-direction: column;
     box-sizing: border-box;
 }
+.quizz-usuario-pronto{
+    margin: 69px 0 48px  0;
+}
 .botao-criar {
     height: 40px;
     width: 151px;
@@ -69,6 +72,7 @@ body {
     font-size: 20px;
     font-weight: 700;
     padding-left: 10px;
+    margin-right: 10px;
 }
 .quizzes{
     display: flex;
@@ -250,6 +254,15 @@ body {
     color: white;
     z-index: 1;
 }
+.caixa-titulo{
+    display:flex;
+    align-items: center;
+}
+.caixa-titulo ion-icon{
+    color: #EC362D;
+    font-size: 32px;
+    cursor: pointer;
+}
 .botao-jogar{
     background-color: #EC362D;
     color: #FFF5F4;
@@ -357,7 +370,13 @@ h5 {
         min-width: 330px;
     }
     .quizz-usuario {
+        width: 100%;
+    }
+    .quizz-usuario-pronto{
         width: 98%;
+        display: flex;
+        flex-direction: column;
+        margin: 30px 0 18px  0;
     }
     .quizzes {
         width: 100%;
@@ -365,10 +384,10 @@ h5 {
         justify-content: center;
     }
     .quizz-publico {
+        width: 98%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        text-align: center;
     }
     .quizz {
         width: 100%;
@@ -382,6 +401,7 @@ h5 {
     }
     .titulo-publico {
         width: 100%;
+        margin-right: 0;
     }
     .degrade {
         width: 100%;
