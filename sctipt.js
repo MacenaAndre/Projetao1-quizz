@@ -13,7 +13,9 @@ let objetoPost = {
 
 
 function carregarPublicos() {
-    arrayIds = JSON.parse(localStorage.ids);
+    if(localStorage.length !== 0){
+        arrayIds = JSON.parse(localStorage.ids);
+    } 
     const pag1 = document.querySelector(".conteudo");
     if(arrayIds.length > 0){
         pag1.innerHTML = 
@@ -520,7 +522,7 @@ function renderizarPaginaDois() {
         document.querySelector(".page2").innerHTML += `
         <div class="jogo-quizz">
             <div class="cor-quizz c${i + 1}">${objetoPost.questions[i].title}</div>
-            <div class="alternativas alt${i + 1}">
+            <div class="alternativas alt${i + 1}" onclick="colocarOpaticidade(this)">
             </div>    
         </div>
         `
@@ -531,6 +533,7 @@ function renderizarPaginaDois() {
         `
         //alterarCor(objetoPost.questions[i].color)
         objetoPost.questions[i].answers.sort(embaralhar);
+        
 
         for(let j = 0; j < objetoPost.questions[i].answers.length; j++) {
             document.querySelector(`.alt${i + 1}`).innerHTML += `
@@ -552,27 +555,33 @@ function renderizarPaginaDois() {
         <h6 class="margem" onclick="renderizarHome()">Voltar pra home</h6> 
     `
 }
-function selecionarAlternativa(alternativa) {
+
+function selecionarAlternativa(alternative) {
     
-    let resposta = alternativa.querySelector(".gabarito");
-    alternativa.parentNode.classList.add("clicada");
-    if(alternativa.parentNode.querySelector(".clicada") !== null) {
+    let resposta = alternative.querySelector(".gabarito");
+    alternative.parentNode.classList.add("clicada");
+
+    if(alternative.parentNode.querySelector(".clicada") !== null) {
         return;
     }
+    if(alternative.parentNode.querySelector(".clicada") === null ) {
         if(resposta.innerHTML === "true") {
             console.log("boa");
-            alternativa.classList.add("correta");
-            alternativa.classList.add('clicada')
+            alternative.classList.add("correta");
+            alternative.classList.add("clicada");
             acertos ++;
+            
          } else {
             console.log("baaaad");
-            alternativa.classList.add("incorreta");
-            alternativa.classList.add('clicada')
+            alternative.classList.add("incorreta");
+            alternative.classList.add("clicada");
+        
          }
+    } 
 
 }
 function embaralhar () {
-    return Math.random() - 0.5;
+    return Math.random() - 0.5; 
 }
 //function reiniciarQuizz() {document.querySelector("style").innerHTML += ""}
 //exibirResultado()
@@ -618,6 +627,7 @@ function renderizarQuizzFeito(objeto){
         `
         //alterarCor(objetoPost.questions[i].color)
         objeto.data.questions[i].answers.sort(embaralhar);
+
         for(let j = 0; j < objeto.data.questions[i].answers.length; j++) {
             document.querySelector(`.alt${i + 1}`).innerHTML += `
                 <div class="alternativa numb${j + 1}" onclick="selecionarAlternativa(this)">
