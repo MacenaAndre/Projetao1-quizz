@@ -22,6 +22,7 @@ function carregarPublicos() {
         arrayIds = JSON.parse(localStorage.ids);
     }
     const pag1 = document.querySelector(".conteudo");
+    pag1.classList.remove("juntar");
     if(arrayIds.length > 0){
         pag1.innerHTML = 
         `  
