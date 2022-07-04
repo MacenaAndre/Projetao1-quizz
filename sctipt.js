@@ -118,7 +118,7 @@ function verificaQuizzUsuario(listaquizz){
 }
 
 function carregouSucesso (resposta) {
-    console.log(resposta.data)
+
     listaquizz = resposta.data;
     const elemento = document.querySelector(".quizzes:last-child");
 
@@ -189,7 +189,7 @@ function objetoNiveis() {
             minValue: 0
         })
     }
-    console.log(objetoPost.levels);
+    
 }
 function objetoPerguntas() {
     for(let i = 0; i < numPerguntas; i++) {
@@ -199,7 +199,7 @@ function objetoPerguntas() {
             answers: []
         })
     }
-    console.log(objetoPost.questions);
+    
 }
 function renderizarPaginaTresDois(){
     document.querySelector('.conteudo').innerHTML = `<h3>Crie suas perguntas</h3>`
@@ -405,7 +405,7 @@ function listarNiveis () {
        objetoPost.levels[i].text = descricao
        objetoPost.levels[i].minValue = Number(porcentagem);
     }
-    console.log(objetoPost);
+
 }
 
 function enviarQuizz(){
@@ -481,7 +481,7 @@ function listarPerguntas(){
         
         
     }
-    console.log(objetoPost);
+    
 }
 function renderizarpaginaTresQuatro() {
     document.querySelector('.conteudo').innerHTML = `
@@ -638,11 +638,10 @@ function selecionarAlternativa(elemento) {
         jogadas = 0;
         acertos = 0;
         contador = 2;
-        alert("Finaaaaaaaaaaaaaal")
+        
     } else {
         setTimeout(scrollProxima, 2000);
     }
-    console.log(contador, jogadas, acertos);
         
     opcao = "";
 }
@@ -667,7 +666,7 @@ function pegarObjetoPeloId(elemento){
 }
 
 function renderizarQuizzFeito(objeto){
-    console.log(objeto.data)
+
     const content = document.querySelector(".conteudo");
     content.classList.add("juntar");
     content.innerHTML = `
@@ -754,13 +753,13 @@ function reiniciarQuizz() {
     jogadas = 0;
     acertos = 0;
     resultadojogo = 0;
-    console.log(contador, jogadas, acertos);
+    
 }
 function popularLista () {
      for(let i = 0; i < quantidadeNiveis; i++) {
         listaMinValue.push(objetoJogo.levels[i].minValue);
      }
-     console.log(listaMinValue);
+     
 }
 function listarMenores(num, lista) {
     let menores = [];
