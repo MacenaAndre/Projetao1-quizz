@@ -13,7 +13,9 @@ let objetoPost = {
 
 
 function carregarPublicos() {
-    arrayIds = JSON.parse(localStorage.ids);
+    if(localStorage.length !== 0) {
+        arrayIds = JSON.parse(localStorage.ids);
+    }
     const pag1 = document.querySelector(".conteudo");
     if(arrayIds.length > 0){
         pag1.innerHTML = 
