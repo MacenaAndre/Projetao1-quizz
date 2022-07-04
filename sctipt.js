@@ -509,6 +509,9 @@ function avancaNiveis() {
 }
 //----------------novo-----------------
 function renderizarHome() {
+    contador = 2;
+    jogadas = 0;
+    acertos = 0;
     document.querySelector("style").innerHTML += ""
     carregarPublicos();
 }
@@ -636,14 +639,14 @@ function selecionarAlternativa(elemento) {
     } else {
         setTimeout(scrollProxima, 2000);
     }
-    
+    console.log(contador, jogadas, acertos);
         
     opcao = "";
 }
 function embaralhar () {
     return Math.random() - 0.5; 
 }
-//function reiniciarQuizz() {document.querySelector("style").innerHTML += ""}
+
 //exibirResultado()
 function pegaQuizzUsuario(){
     for(let i = 0; i < arrayIds.length; i++){
@@ -719,4 +722,32 @@ function scrollProxima () {
 function scrollTopo() {
     let topo = document.querySelector(".topo");
     topo.scrollIntoView({block: "center"});
+}
+function reiniciarQuizz() {
+    for(let i = 0; i < 100; i++) {
+    let correta = document.querySelector(".correta");
+    let incorreta = document.querySelector(".incorreta");
+    let naoclique = document.querySelector(".nao-clicada");
+    let clique = document.querySelector(".clicada");
+
+    if(correta !== null) {
+        correta.classList.remove("correta");
+    }
+    if(incorreta !== null) {
+        incorreta.classList.remove("incorreta");
+    }
+    if(naoclique !== null) {
+        naoclique.classList.remove("nao-clicada");
+    }
+    if(clique !== null) {
+        clique.classList.remove("clicada");
+    }
+    }
+    let topo = document.querySelector(".topo");
+    topo.scrollIntoView({behavior: "smooth"});
+    contador = 2;
+    jogadas = 0;
+    acertos = 0;
+    resultadojogo = 0;
+    console.log(contador, jogadas, acertos);
 }
