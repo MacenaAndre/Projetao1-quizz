@@ -24,6 +24,7 @@ function carregarPublicos() {
         arrayIds = JSON.parse(localStorage.ids);
     }
     const pag1 = document.querySelector(".conteudo");
+    pag1.classList.remove("juntar");
     if(arrayIds.length > 0){
         pag1.innerHTML = 
         `  
@@ -532,7 +533,7 @@ function renderizarPaginaDois() {
         document.querySelector(".page2").innerHTML += `
         <div class="jogo-quizz">
             <div class="cor-quizz c${i + 1}">${objetoPost.questions[i].title}</div>
-            <div class="alternativas alt${i + 1}">
+            <div class="alternativas alt${i + 1}" onclick="colocarOpaticidade(this)">
             </div>    
         </div>
         `
