@@ -554,6 +554,8 @@ function renderizarPaginaDois() {
     `
 }
 function selecionarAlternativa(alternative) {
+
+    console.log(alternative);
     
     let resposta = alternative.querySelector(".gabarito");
     alternative.parentNode.classList.add("clicada");
@@ -561,7 +563,7 @@ function selecionarAlternativa(alternative) {
     if(alternative.parentNode.querySelector(".clicada") !== null) {
         return;
     }
-    if(alternative.parentNode.querySelector(".clicada") === null ) {
+    if(alternative.parentNode.querySelector(".clicada") === null) {
         if(resposta.innerHTML === "true") {
             console.log("boa");
             alternative.classList.add("correta");
