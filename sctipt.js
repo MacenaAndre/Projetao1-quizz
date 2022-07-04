@@ -748,11 +748,12 @@ function reiniciarQuizz() {
     }
     document.querySelector(".exibir-resultado").innerHTML = "";
     let topo = document.querySelector(".topo");
-    topo.scrollIntoView({behavior: "smooth"});
     contador = 2;
     jogadas = 0;
     acertos = 0;
     resultadojogo = 0;
+    topo.scrollIntoView({behavior: "smooth"});
+    
     
 }
 function popularLista () {
@@ -781,7 +782,7 @@ function exibirResultado() {
         }
     }
     for(let j = 0; j < objetoJogo.levels.length; j++) {
-        if(objetoJogo.levels[j].minValue === maior) {
+        if(objetoJogo.levels[j].minValue == maior) {
             informacao = objetoJogo.levels[j]
             document.querySelector(".exibir-resultado").innerHTML = `
             <div class="jogo-quizz">
