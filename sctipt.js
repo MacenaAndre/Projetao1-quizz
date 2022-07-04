@@ -553,15 +553,23 @@ function renderizarPaginaDois() {
     `
 }
 function selecionarAlternativa(alternativa) {
-    let limitador = 0
+    
     let resposta = alternativa.querySelector(".gabarito");
-    if(resposta.innerHTML === "true") {
-       console.log("boa");
-       limitador ++
-    } else {
-       console.log("baaaad");
-       limitador ++
+    alternativa.parentNode.classList.add("clicada");
+    if(alternativa.parentNode.querySelector(".clicada") !== null) {
+        return;
     }
+        if(resposta.innerHTML === "true") {
+            console.log("boa");
+            alternativa.classList.add("correta");
+            alternativa.classList.add('clicada')
+            acertos ++;
+         } else {
+            console.log("baaaad");
+            alternativa.classList.add("incorreta");
+            alternativa.classList.add('clicada')
+         }
+
 }
 function embaralhar () {
     return Math.random() - 0.5;

@@ -376,6 +376,7 @@ h5 {
     font-weight: 700;
     text-align: left;
     margin-top: 12px;
+    word-break: break-word;
 }
 .correta {
     color: #009C22;
@@ -420,12 +421,19 @@ h5 {
     display: flex;
     cursor: pointer;
 }
+.campo-corpo{
+    width: 100%;
+}
 @media (max-width: 1100px) {
 
      body {
         display: flex;
         flex-direction: column;
         align-items: center;
+     }
+     h5{
+        font-size: 1em;
+        word-break: break-word;
      }
     .conteudo {
         width: 100%;
@@ -507,5 +515,23 @@ h5 {
     }
     .botao-informacoes{
         width: 90%;
+    }
+    .jogo-quizz{
+        width: 100%;
+    }
+    .alternativas{
+        width: 90%;
+;
+    }
+    .alternativa{
+        width: 50%;
+        height: 250px;
+    }
+    .cor-quizz{
+        width: 90%;
+    }
+    .img-jogo{
+        width: 100%;
+        height: 60%;
     }
 }
