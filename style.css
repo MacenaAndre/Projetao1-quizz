@@ -374,7 +374,6 @@ h6 {
 }
 .alternativa {
     padding: 10px 14px;
-    max-width: 360px;
     word-break: normal;
     cursor: pointer;
 }
@@ -545,5 +544,14 @@ h5 {
     }
     .jogo-quizz:last-child{
         margin-bottom: 10%;
+    }
+    .botao-jogar {
+        width: 60%;
+    }
+    .botao-reiniciar {
+        width: 60%;
+    }
+    .cor-resultado {
+        width: 90%;
     }
 }
