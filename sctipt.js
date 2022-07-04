@@ -2,7 +2,6 @@ let listaquizz;
 let arrayUsuario;
 let numNiveis;
 let numPerguntas;
-let acertos = 0;
 let arrayIds = [];
 let objetoPost = {
     title: "", 
@@ -10,12 +9,18 @@ let objetoPost = {
     questions: [],
     levels: []
 };
+let acertos = 0;
+let jogadas = 0;
+let quantidadePerguntas = 0;
+let quantidadeNiveis = 0;
+let resultadojogo = 0;
+let contador = 2;
 
 
 function carregarPublicos() {
-    if(localStorage.length !== 0){
+    if(localStorage.length !== 0) {
         arrayIds = JSON.parse(localStorage.ids);
-    } 
+    }
     const pag1 = document.querySelector(".conteudo");
     if(arrayIds.length > 0){
         pag1.innerHTML = 
@@ -504,6 +509,9 @@ function avancaNiveis() {
 }
 //----------------novo-----------------
 function renderizarHome() {
+    contador = 2;
+    jogadas = 0;
+    acertos = 0;
     document.querySelector("style").innerHTML += ""
     carregarPublicos();
 }
@@ -555,35 +563,90 @@ function renderizarPaginaDois() {
         <h6 class="margem" onclick="renderizarHome()">Voltar pra home</h6> 
     `
 }
+function selecionarAlternativa(elemento) {
+    let opcao;
+    let pai = elemento.parentNode;
 
-function selecionarAlternativa(alternative) {
-    
-    let resposta = alternative.querySelector(".gabarito");
-    alternative.parentNode.classList.add("clicada");
-
-    if(alternative.parentNode.querySelector(".clicada") !== null) {
+    if(pai.classList.contains("clicada")) {
         return;
     }
-    if(alternative.parentNode.querySelector(".clicada") === null ) {
-        if(resposta.innerHTML === "true") {
-            console.log("boa");
-            alternative.classList.add("correta");
-            alternative.classList.add("clicada");
-            acertos ++;
-            
-         } else {
-            console.log("baaaad");
-            alternative.classList.add("incorreta");
-            alternative.classList.add("clicada");
-        
-         }
-    } 
+    
+    elemento.classList.add("clicada")
+    pai.classList.add("clicada");
 
+    if(pai.querySelector(".numb3") === null) {
+    for(let i = 1; i <= 2; i++) {
+        opcao = pai.querySelector(`.numb${i}`);
+
+        if(opcao.querySelector(".gabarito").innerHTML === "true") {
+            opcao.classList.add("correta");
+        }
+        if(opcao.querySelector(".gabarito").innerHTML === "false") {
+            opcao.classList.add("incorreta");
+        }
+        if(opcao.classList.contains("clicada")) {
+
+        } else {
+            opcao.classList.add("nao-clicada");
+        }
+    }
+    } else if(pai.querySelector(".numb4") === null) {
+      for(let i = 1; i <= 3; i++) {
+            opcao = pai.querySelector(`.numb${i}`);
+    
+            if(opcao.querySelector(".gabarito").innerHTML === "true") {
+                opcao.classList.add("correta");
+            }
+            if(opcao.querySelector(".gabarito").innerHTML === "false") {
+                opcao.classList.add("incorreta");
+            }
+            if(opcao.classList.contains("clicada")) {
+    
+            } else {
+                opcao.classList.add("nao-clicada");
+            }
+      }
+      } else {
+        for(let i = 1; i <= 4; i++) {
+           opcao = pai.querySelector(`.numb${i}`);
+    
+           if(opcao.querySelector(".gabarito").innerHTML === "true") {
+               opcao.classList.add("correta");
+           }
+           if(opcao.querySelector(".gabarito").innerHTML === "false") {
+               opcao.classList.add("incorreta");
+           }
+           if(opcao.classList.contains("clicada")) {
+
+           } else {
+               opcao.classList.add("nao-clicada");
+           }
+        }
+        }
+
+    if(elemento.classList.contains("correta")) {
+        acertos ++;
+    }
+    jogadas ++;
+    
+    if(jogadas === quantidadePerguntas) {
+        resultadojogo = Math.round((acertos/jogadas) * 100);
+        //chamar função aqui//-------------
+        jogadas = 0;
+        acertos = 0;
+        contador = 2;
+        alert("Finaaaaaaaaaaaaaal")
+    } else {
+        setTimeout(scrollProxima, 2000);
+    }
+    console.log(contador, jogadas, acertos);
+        
+    opcao = "";
 }
 function embaralhar () {
     return Math.random() - 0.5; 
 }
-//function reiniciarQuizz() {document.querySelector("style").innerHTML += ""}
+
 //exibirResultado()
 function pegaQuizzUsuario(){
     for(let i = 0; i < arrayIds.length; i++){
@@ -647,4 +710,44 @@ function renderizarQuizzFeito(objeto){
         </div>  
         <h6 class="margem" onclick="renderizarHome()">Voltar pra home</h6> 
     `
+    quantidadePerguntas = objeto.data.questions.length;
+    quantidadeNiveis = objeto.data.levels.length;
+    scrollTopo();
+}
+function scrollProxima () {
+    let proxima = document.querySelector(`.alt${contador}`);
+    proxima.scrollIntoView({behavior: "smooth", block: "center"});
+    contador ++;
+}
+function scrollTopo() {
+    let topo = document.querySelector(".topo");
+    topo.scrollIntoView({block: "center"});
+}
+function reiniciarQuizz() {
+    for(let i = 0; i < 100; i++) {
+    let correta = document.querySelector(".correta");
+    let incorreta = document.querySelector(".incorreta");
+    let naoclique = document.querySelector(".nao-clicada");
+    let clique = document.querySelector(".clicada");
+
+    if(correta !== null) {
+        correta.classList.remove("correta");
+    }
+    if(incorreta !== null) {
+        incorreta.classList.remove("incorreta");
+    }
+    if(naoclique !== null) {
+        naoclique.classList.remove("nao-clicada");
+    }
+    if(clique !== null) {
+        clique.classList.remove("clicada");
+    }
+    }
+    let topo = document.querySelector(".topo");
+    topo.scrollIntoView({behavior: "smooth"});
+    contador = 2;
+    jogadas = 0;
+    acertos = 0;
+    resultadojogo = 0;
+    console.log(contador, jogadas, acertos);
 }
