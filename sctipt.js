@@ -13,9 +13,7 @@ let objetoPost = {
 
 
 function carregarPublicos() {
-    if(arrayIds === undefined){
-        arrayIds = localStorage.ids;
-    }
+    arrayIds = JSON.parse(localStorage.ids);
     const pag1 = document.querySelector(".conteudo");
     if(arrayIds.length > 0){
         pag1.innerHTML = 
@@ -57,13 +55,10 @@ function carregarPublicos() {
         `
     }
     const promise = axios.get("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes");
-    
     promise.catch(carregouErro);
     promise.then(carregouSucesso); 
     promise.then(pegaQuizzUsuario);
-
-    arrayIds = JSON.parse(localStorage.ids);
-   
+    
 }
 
 
@@ -72,12 +67,11 @@ function carregouErro (Erro) {
 }
 
 function carregouQuizzesUsuario(quizz){
-    console.log(quizz)
     const elemento = document.querySelector(".quizzes-seu");
     for(let i = 0; i < localStorage.length;i++){
         elemento.innerHTML += 
         `
-        <div class="quizz">
+        <div class="quizz"  id="${quizz.data.id}" onclick="pegarObjetoPeloId(this)">
             <img class="img-quizz" src="${quizz.data.image}" alt="">
             <div class="degrade"></div>
             <div class="centralizar-titulo">
@@ -88,7 +82,6 @@ function carregouQuizzesUsuario(quizz){
     }
 }
 function verificaQuizzUsuario(listaquizz){
-    console.log(listaquizz.id, arrayIds)
     for(let i = 0; i < arrayIds.length;i++){
         if(listaquizz.id === arrayIds[i]){
             return `
@@ -103,7 +96,7 @@ function verificaQuizzUsuario(listaquizz){
         }
     }
     return `
-    <div class="quizz">
+    <div class="quizz"  id="${listaquizz.id}" onclick="pegarObjetoPeloId(this)">
         <img class="img-quizz" src="${listaquizz.image}" alt="">
         <div class="degrade"></div>
         <div class="centralizar-titulo">
@@ -320,7 +313,6 @@ function verificarPerguntas(){
 
 function validarHexa(hexa){
     let reg=/^#([0-9a-f]{6}){1,2}$/i;
-    console.log(reg.test(hexa))
     return reg.test(hexa);
 }
 function renderizarPaginaTresTres() {
@@ -410,10 +402,7 @@ function enviarQuizz(){
     const promise = axios.post('https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes',objetoPost);
     promise.then( resposta =>{
         renderizarpaginaTresQuatro();    
-        console.log(resposta);
-        console.log(resposta.data.id);
         acumalarIds(resposta.data.id);
-        console.log(localStorage);
     });
     promise.catch(()=>{
         alert('Deu erro :(');
@@ -564,16 +553,29 @@ function renderizarPaginaDois() {
         <h6 class="margem" onclick="renderizarHome()">Voltar pra home</h6> 
     `
 }
-function selecionarAlternativa(alternativa) {
-    let limitador = 0
-    let resposta = alternativa.querySelector(".gabarito");
-    if(resposta.innerHTML === "true") {
-       console.log("boa");
-       limitador ++
-    } else {
-       console.log("baaaad");
-       limitador ++
+function selecionarAlternativa(alternative) {
+    
+    let resposta = alternative.querySelector(".gabarito");
+    alternative.parentNode.classList.add("clicada");
+
+    if(alternative.parentNode.querySelector(".clicada") !== null) {
+        return;
     }
+    if(alternative.parentNode.querySelector(".clicada") === null ) {
+        if(resposta.innerHTML === "true") {
+            console.log("boa");
+            alternative.classList.add("correta");
+            alternative.classList.add("clicada");
+            acertos ++;
+            
+         } else {
+            console.log("baaaad");
+            alternative.classList.add("incorreta");
+            alternative.classList.add("clicada");
+        
+         }
+    } 
+
 }
 function embaralhar () {
     return Math.random() - 0.5; 
@@ -587,4 +589,59 @@ function pegaQuizzUsuario(){
         promise.catch(carregouErro)
     }
     
+}
+
+function pegarObjetoPeloId(elemento){
+   const id = Number(elemento.id);
+   const promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/${id}`);
+   promise.then(renderizarQuizzFeito)
+   promise.catch(carregouErro)
+}
+
+function renderizarQuizzFeito(objeto){
+    console.log(objeto.data)
+    const content = document.querySelector(".conteudo");
+    content.classList.add("juntar");
+    content.innerHTML = `
+    <div class="page2">
+        <img class="capa" src="${objeto.data.image}" alt="">
+        <div class="degrade2">${objeto.data.title}</div>
+    </div>
+    `
+
+    for(let i = 0; i < objeto.data.questions.length; i++) {
+        document.querySelector(".page2").innerHTML += `
+        <div class="jogo-quizz">
+            <div class="cor-quizz c${i + 1}">${objeto.data.questions[i].title}</div>
+            <div class="alternativas alt${i + 1}">
+            </div>    
+        </div>
+        `
+        document.querySelector("style").innerHTML += `
+            .c${i +1} {
+                background-color: ${objeto.data.questions[i].color};
+            }
+        `
+        //alterarCor(objetoPost.questions[i].color)
+        objeto.data.questions[i].answers.sort(embaralhar);
+
+        for(let j = 0; j < objeto.data.questions[i].answers.length; j++) {
+            document.querySelector(`.alt${i + 1}`).innerHTML += `
+                <div class="alternativa numb${j + 1}" onclick="selecionarAlternativa(this)">
+                    <img class="img-jogo "src="${objeto.data.questions[i].answers[j].image}" alt="">
+                    <h5>${objeto.data.questions[i].answers[j].text}</h5>
+                    <div class="escondido gabarito">${objeto.data.questions[i].answers[j].isCorrectAnswer}</div>
+                </div>
+            `
+        }    
+    }
+
+    document.querySelector(".page2").innerHTML += `
+        <div class="exibir-resultado">
+        </div>
+        <div class="botao-reiniciar" onclick="reiniciarQuizz()">
+            Reiniciar Quizz
+        </div>  
+        <h6 class="margem" onclick="renderizarHome()">Voltar pra home</h6> 
+    `
 }
