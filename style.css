@@ -383,6 +383,7 @@ h5 {
     text-align: left;
     margin-top: 12px;
     word-break: break-word;
+    width: 330px;
 }
 .correta {
     color: #009C22;
@@ -443,6 +444,7 @@ h5 {
      h5{
         font-size: 1em;
         word-break: break-word;
+        width: 100%;
      }
     .conteudo {
         width: 100%;

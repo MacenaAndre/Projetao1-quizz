@@ -746,7 +746,7 @@ function reiniciarQuizz() {
         clique.classList.remove("clicada");
     }
     }
-    document.querySelector(".exibir-resultado").classList.add("escondido");
+    document.querySelector(".exibir-resultado").innerHTML = "";
     let topo = document.querySelector(".topo");
     topo.scrollIntoView({behavior: "smooth"});
     contador = 2;
@@ -796,8 +796,9 @@ function exibirResultado() {
             </div>
             `
         }
-        document.querySelector(".exibir-resultado").classList.remove("escondido");
+        
     } 
+    
     setTimeout(scrollResultado, 2000);
 }
 function scrollResultado () {
