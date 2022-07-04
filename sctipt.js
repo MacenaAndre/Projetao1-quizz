@@ -15,6 +15,8 @@ let quantidadePerguntas = 0;
 let quantidadeNiveis = 0;
 let resultadojogo = 0;
 let contador = 2;
+let objetoJogo;
+let listaMinValue = [];
 
 
 function carregarPublicos() {
@@ -631,7 +633,7 @@ function selecionarAlternativa(elemento) {
     
     if(jogadas === quantidadePerguntas) {
         resultadojogo = Math.round((acertos/jogadas) * 100);
-        //chamar função aqui//-------------
+        exibirResultado()
         jogadas = 0;
         acertos = 0;
         contador = 2;
@@ -647,7 +649,6 @@ function embaralhar () {
     return Math.random() - 0.5; 
 }
 
-//exibirResultado()
 function pegaQuizzUsuario(){
     for(let i = 0; i < arrayIds.length; i++){
         const promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/${arrayIds[i]}`);
@@ -712,7 +713,9 @@ function renderizarQuizzFeito(objeto){
     `
     quantidadePerguntas = objeto.data.questions.length;
     quantidadeNiveis = objeto.data.levels.length;
+    objetoJogo = objeto.data;
     scrollTopo();
+    popularLista();
 }
 function scrollProxima () {
     let proxima = document.querySelector(`.alt${contador}`);
@@ -743,6 +746,7 @@ function reiniciarQuizz() {
         clique.classList.remove("clicada");
     }
     }
+    document.querySelector(".exibir-resultado").classList.add("escondido");
     let topo = document.querySelector(".topo");
     topo.scrollIntoView({behavior: "smooth"});
     contador = 2;
@@ -750,4 +754,53 @@ function reiniciarQuizz() {
     acertos = 0;
     resultadojogo = 0;
     console.log(contador, jogadas, acertos);
+}
+function popularLista () {
+     for(let i = 0; i < quantidadeNiveis; i++) {
+        listaMinValue.push(objetoJogo.levels[i].minValue);
+     }
+     console.log(listaMinValue);
+}
+function listarMenores(num, lista) {
+    let menores = [];
+  for(let i = 0; i < lista.length; i++) {
+    if(lista[i] <= num) {
+      menores.push(lista[i]);
+    }
+  }
+  return menores;
+}
+function exibirResultado() {
+    let array = listarMenores(resultadojogo, listaMinValue);
+    let maior = 0;
+    let informacao;
+
+    for(let i = 0; i < array.length; i++) {
+        if(array[i] > maior) {
+            maior = array[i];
+        }
+    }
+    for(let j = 0; j < objetoJogo.levels.length; j++) {
+        if(objetoJogo.levels[j].minValue === maior) {
+            informacao = objetoJogo.levels[j]
+            document.querySelector(".exibir-resultado").innerHTML = `
+            <div class="jogo-quizz">
+               <div class="cor-resultado">
+                  ${resultadojogo}% de acerto: ${informacao.title}
+               </div>
+               <div class="alternativas">
+                  <img class="resultado-img" src="${informacao.image}" alt="">
+                  <div class="descricao">${informacao.text}</div>
+            
+               </div>    
+            </div>
+            `
+        }
+        document.querySelector(".exibir-resultado").classList.remove("escondido");
+    } 
+    setTimeout(scrollResultado, 2000);
+}
+function scrollResultado () {
+    let resultado = document.querySelector(".exibir-resultado");
+    resultado.scrollIntoView({block: "center"});
 }

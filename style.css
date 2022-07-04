@@ -420,6 +420,9 @@ h5 {
     display: flex;
     cursor: pointer;
 }
+.cor-resultado {
+    padding: 10px;
+}
 @media (max-width: 1100px) {
 
      body {
